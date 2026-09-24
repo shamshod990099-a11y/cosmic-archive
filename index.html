@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cosmic Archive | Explore the Universe</title>
+    <title>Cosmic Archive — Astronomy & Physics</title>
 
     <meta name="description"
-          content="Cosmic Archive — explore stars, black holes, galaxies, supernovae, exoplanets, cosmology and physics through detailed scientific articles and interactive calculators.">
-
-    <meta name="keywords"
-          content="astronomy, astrophysics, physics, stars, black holes, galaxies, supernovae, exoplanets, cosmology, physics calculator">
+          content="Cosmic Archive — Astronomy, Astrophysics, Physics and Space exploration.">
+    <meta name="author" content="Narziqulov Shamshod Ozod o‘g‘li">
 
     <style>
         * {
@@ -25,309 +23,119 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            color: #f5f7ff;
+            color: white;
             background:
-                radial-gradient(circle at 20% 10%, rgba(80, 60, 180, 0.25), transparent 35%),
-                radial-gradient(circle at 80% 30%, rgba(0, 140, 255, 0.18), transparent 35%),
-                linear-gradient(135deg, #03030b, #080b20 50%, #02030a);
+                radial-gradient(circle at 20% 20%, #172554 0, transparent 35%),
+                radial-gradient(circle at 80% 80%, #312e81 0, transparent 35%),
+                linear-gradient(135deg, #020617, #0f172a 50%, #020617);
             min-height: 100vh;
-            line-height: 1.6;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* NAVBAR */
-
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            padding: 18px 7%;
-
-            background: rgba(3, 3, 12, 0.88);
-            backdrop-filter: blur(14px);
-
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: #7d8cff;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 24px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #cbd0e8;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: white;
-        }
-
-        /* HERO */
-
-        .hero {
-            min-height: 88vh;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
+        header {
+            padding: 70px 20px 50px;
             text-align: center;
-
-            padding: 80px 20px;
-
-            background:
-                radial-gradient(circle at center, rgba(80, 90, 255, 0.16), transparent 45%);
         }
 
-        .hero .badge {
-            padding: 8px 18px;
-            border: 1px solid rgba(150,160,255,0.35);
-            border-radius: 999px;
-
-            color: #aeb7ff;
-            font-size: 13px;
-
-            margin-bottom: 25px;
+        header h1 {
+            font-size: clamp(42px, 8vw, 78px);
+            letter-spacing: 4px;
+            margin-bottom: 15px;
         }
 
-        .hero h1 {
-            font-size: clamp(48px, 9vw, 100px);
-            line-height: 1;
-
-            background: linear-gradient(
-                90deg,
-                #ffffff,
-                #a7b0ff,
-                #75bfff
-            );
-
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            margin-bottom: 25px;
-        }
-
-        .hero p {
-            max-width: 760px;
-            color: #b9bfd8;
+        header p {
+            color: #cbd5e1;
             font-size: 18px;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.7;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 35px;
-            flex-wrap: wrap;
-            justify-content: center;
+        .creator {
+            margin-top: 20px;
+            color: #94a3b8;
+            font-size: 14px;
         }
 
-        .btn {
-            padding: 13px 23px;
-            border-radius: 12px;
-
-            background: #ffffff;
-            color: #05050c;
-
-            font-weight: 700;
-
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-        }
-
-        .btn.secondary {
-            background: rgba(255,255,255,0.06);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.12);
-        }
-
-        /* GENERAL */
-
-        section {
-            padding: 90px 7%;
+        .container {
+            width: min(1150px, 92%);
+            margin: auto;
+            padding-bottom: 70px;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin: 30px 0 30px;
         }
 
         .section-title h2 {
-            font-size: 42px;
-            margin-bottom: 12px;
+            font-size: 32px;
+            margin-bottom: 10px;
         }
 
         .section-title p {
-            color: #9da5c5;
+            color: #94a3b8;
         }
 
-        /* TOPIC CARDS */
-
-        .topics {
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 22px;
+            gap: 20px;
         }
 
         .card {
-            position: relative;
-
-            padding: 30px;
-
-            min-height: 230px;
-
-            border-radius: 22px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.075),
-                    rgba(255,255,255,0.025)
-                );
-
-            border: 1px solid rgba(255,255,255,0.09);
-
-            overflow: hidden;
-
-            transition: 0.35s;
+            display: block;
+            text-decoration: none;
+            color: white;
+            padding: 28px;
+            min-height: 190px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(10px);
+            transition: 0.25s ease;
         }
 
         .card:hover {
             transform: translateY(-7px);
-
-            border-color: rgba(150,160,255,0.45);
-
-            box-shadow:
-                0 15px 50px rgba(0,0,0,0.35);
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(30, 41, 59, 0.9);
         }
 
-        .card .icon {
-            font-size: 42px;
+        .icon {
+            font-size: 40px;
             margin-bottom: 18px;
         }
 
         .card h3 {
-            font-size: 23px;
+            font-size: 22px;
             margin-bottom: 10px;
         }
 
         .card p {
-            color: #aeb5d0;
-            font-size: 14px;
+            color: #aebbd0;
+            line-height: 1.6;
+            font-size: 15px;
         }
 
-        .card .open {
-            display: inline-block;
-            margin-top: 20px;
-
-            color: #9faaff;
-            font-size: 14px;
-            font-weight: 700;
+        .special {
+            margin-top: 45px;
         }
-
-        /* FEATURES */
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .feature {
-            padding: 28px;
-            border-radius: 18px;
-
-            background: rgba(255,255,255,0.035);
-            border: 1px solid rgba(255,255,255,0.07);
-        }
-
-        .feature h3 {
-            margin-bottom: 8px;
-        }
-
-        .feature p {
-            color: #9fa7c4;
-            font-size: 14px;
-        }
-
-        /* ABOUT */
-
-        .about {
-            max-width: 900px;
-            margin: auto;
-
-            text-align: center;
-        }
-
-        .about p {
-            color: #b0b7d0;
-            margin-bottom: 20px;
-        }
-
-        /* FOOTER */
 
         footer {
-            padding: 40px 7%;
-
-            border-top: 1px solid rgba(255,255,255,0.08);
-
             text-align: center;
-
-            color: #747b98;
-            font-size: 14px;
+            padding: 35px 20px;
+            border-top: 1px solid rgba(148, 163, 184, 0.15);
+            color: #94a3b8;
+            line-height: 1.8;
         }
 
         footer strong {
-            color: #bfc6ff;
+            color: white;
         }
 
-        /* MOBILE */
-
-        @media (max-width: 700px) {
-
-            nav {
-                padding: 16px 5%;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            section {
-                padding: 70px 5%;
-            }
-
-            .hero {
-                min-height: 80vh;
-            }
-
-            .section-title h2 {
-                font-size: 34px;
+        @media (max-width: 600px) {
+            header {
+                padding-top: 45px;
             }
 
             .card {
@@ -339,372 +147,142 @@
 
 <body>
 
-<!-- ================= NAVIGATION ================= -->
-
-<nav>
-
-    <a href="index.html" class="logo">
-        COSMIC <span>ARCHIVE</span>
-    </a>
-
-    <ul class="nav-links">
-
-        <li>
-            <a href="#topics">Topics</a>
-        </li>
-
-        <li>
-            <a href="#features">Features</a>
-        </li>
-
-        <li>
-            <a href="physics-calculator.html">
-                Physics Lab
-            </a>
-        </li>
-
-        <li>
-            <a href="about-creator.html">
-                Creator
-            </a>
-        </li>
-
-    </ul>
-
-</nav>
-
-
-<!-- ================= HERO ================= -->
-
-<header class="hero">
-
-    <div class="badge">
-        SCIENCE • PHYSICS • ASTRONOMY • COSMOLOGY
-    </div>
-
-    <h1>
-        EXPLORE<br>
-        THE UNIVERSE
-    </h1>
+<header>
+    <h1>🌌 COSMIC ARCHIVE</h1>
 
     <p>
-        A scientific journey through stars, black holes, galaxies,
-        supernovae, exoplanets and the fundamental physics of our universe.
+        Explore the universe through astronomy, astrophysics,
+        physics and modern scientific discoveries.
     </p>
 
-    <div class="hero-buttons">
-
-        <a href="#topics" class="btn">
-            Explore Topics
-        </a>
-
-        <a href="physics-calculator.html" class="btn secondary">
-            Open Physics Lab
-        </a>
-
+    <div class="creator">
+        Created by Narziqulov Shamshod Ozod o‘g‘li
     </div>
-
 </header>
 
 
-<!-- ================= TOPICS ================= -->
-
-<section id="topics">
+<main class="container">
 
     <div class="section-title">
-
-        <h2>Explore the Cosmos</h2>
-
-        <p>
-            Choose a topic and dive into the science behind it.
-        </p>
-
+        <h2>Explore the Universe</h2>
+        <p>Choose a topic and begin your journey through space and science.</p>
     </div>
 
 
-    <div class="topics">
-
+    <div class="grid">
 
         <!-- STARS -->
-
         <a href="stars.html" class="card">
-
             <div class="icon">⭐</div>
-
             <h3>Stars</h3>
-
             <p>
-                Learn how stars are born, how nuclear fusion powers them,
-                and how they eventually evolve and die.
+                Learn how stars are born, evolve, produce energy,
+                and eventually die.
             </p>
-
-            <span class="open">
-                Explore Stars →
-            </span>
-
         </a>
 
 
         <!-- BLACK HOLES -->
-
         <a href="black-holes.html" class="card">
-
             <div class="icon">🕳️</div>
-
             <h3>Black Holes</h3>
-
             <p>
-                Explore event horizons, spacetime, accretion disks,
-                gravitational waves and the physics of black holes.
+                Explore event horizons, spacetime, singularities,
+                accretion disks and gravitational waves.
             </p>
-
-            <span class="open">
-                Explore Black Holes →
-            </span>
-
         </a>
 
 
         <!-- GALAXIES -->
-
         <a href="galaxies.html" class="card">
-
             <div class="icon">🌌</div>
-
             <h3>Galaxies</h3>
-
             <p>
-                Discover spiral, elliptical and irregular galaxies,
-                dark matter, galaxy formation and the cosmic web.
+                Discover the Milky Way, galaxy types, dark matter,
+                mergers and the cosmic web.
             </p>
-
-            <span class="open">
-                Explore Galaxies →
-            </span>
-
         </a>
 
 
         <!-- SUPERNOVAE -->
-
         <a href="supernovae.html" class="card">
-
             <div class="icon">💥</div>
-
             <h3>Supernovae</h3>
-
             <p>
-                Discover the enormous explosions that mark the deaths
-                of stars and create many of the elements in the universe.
+                Discover stellar explosions, neutron stars,
+                black holes and element formation.
             </p>
-
-            <span class="open">
-                Explore Supernovae →
-            </span>
-
         </a>
 
 
         <!-- EXOPLANETS -->
-
         <a href="exoplanets.html" class="card">
-
             <div class="icon">🪐</div>
-
             <h3>Exoplanets</h3>
-
             <p>
-                Explore worlds orbiting other stars, planetary systems,
-                atmospheres and the search for potentially habitable planets.
+                Explore planets beyond our Solar System,
+                planetary atmospheres and habitable worlds.
             </p>
-
-            <span class="open">
-                Explore Exoplanets →
-            </span>
-
         </a>
 
 
         <!-- COSMOLOGY -->
-
         <a href="cosmology.html" class="card">
-
-            <div class="icon">🔭</div>
-
+            <div class="icon">🌠</div>
             <h3>Cosmology</h3>
-
             <p>
-                Study the origin, expansion, structure and possible future
-                of the universe.
+                Study the Big Bang, cosmic expansion, dark energy,
+                dark matter and the evolution of the universe.
             </p>
-
-            <span class="open">
-                Explore Cosmology →
-            </span>
-
         </a>
 
+    </div>
 
-        <!-- PHYSICS CALCULATOR -->
 
+    <!-- TOOLS -->
+    <div class="section-title special">
+        <h2>Scientific Tools</h2>
+        <p>Interactive tools for physics and scientific exploration.</p>
+    </div>
+
+
+    <div class="grid">
+
+        <!-- PHYSICS LAB -->
         <a href="physics-calculator.html" class="card">
-
-            <div class="icon">🧮</div>
-
+            <div class="icon">⚡</div>
             <h3>Physics Lab</h3>
-
             <p>
-                Calculate mechanics, thermodynamics, electromagnetism,
-                optics and modern physics formulas.
+                Calculate mechanics, thermodynamics,
+                electromagnetism, optics and modern physics formulas.
             </p>
-
-            <span class="open">
-                Open Physics Lab →
-            </span>
-
         </a>
 
 
-        <!-- CREATOR -->
-
+        <!-- ABOUT CREATOR -->
         <a href="about-creator.html" class="card">
-
             <div class="icon">👨‍💻</div>
-
             <h3>About Creator</h3>
-
             <p>
-                Learn about the creator of Cosmic Archive,
-                the project and the technology behind it.
+                Learn more about the creator of Cosmic Archive,
+                the project and the technologies behind it.
             </p>
-
-            <span class="open">
-                Meet the Creator →
-            </span>
-
         </a>
 
     </div>
 
-</section>
+</main>
 
-
-<!-- ================= FEATURES ================= -->
-
-<section id="features">
-
-    <div class="section-title">
-
-        <h2>What You'll Find Here</h2>
-
-        <p>
-            Cosmic Archive is designed as a scientific knowledge platform.
-        </p>
-
-    </div>
-
-
-    <div class="features">
-
-
-        <div class="feature">
-
-            <h3>🔬 Scientific Facts</h3>
-
-            <p>
-                Clear explanations based on established scientific concepts
-                and astronomical observations.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <h3>⚛️ Physics & Formulas</h3>
-
-            <p>
-                Important equations are explained and can be explored
-                through the Physics Lab.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <h3>🌌 Cosmic Scale</h3>
-
-            <p>
-                Explore objects ranging from tiny particles to stars,
-                galaxies and the observable universe.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <h3>❓ Open Questions</h3>
-
-            <p>
-                Discover the mysteries that scientists are still working
-                to understand.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= ABOUT ================= -->
-
-<section>
-
-    <div class="about">
-
-        <div class="section-title">
-
-            <h2>About Cosmic Archive</h2>
-
-        </div>
-
-        <p>
-            Cosmic Archive is an educational astronomy and physics project
-            created to make complex scientific ideas easier to explore.
-        </p>
-
-        <p>
-            From stellar evolution and black holes to cosmology and
-            fundamental physics, the project brings different areas of
-            science together in one digital archive.
-        </p>
-
-        <a href="about-creator.html" class="btn">
-            About the Creator
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
 
 <footer>
+    <strong>Cosmic Archive</strong><br>
 
-    <p>
-        © 2026 <strong>Cosmic Archive</strong>
-    </p>
+    Astronomy • Astrophysics • Physics • Programming • AI
 
-    <p>
-        Astronomy • Astrophysics • Physics • Programming
-    </p>
+    <br><br>
 
+    © 2026 Narziqulov Shamshod Ozod o‘g‘li
 </footer>
-
 
 </body>
 </html>

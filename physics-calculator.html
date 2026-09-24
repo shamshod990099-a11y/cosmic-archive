@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Physics Calculator | Cosmic Archive</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:#eaf2ff;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 15% 15%,rgba(40,180,255,.18),transparent 30%),
+        radial-gradient(circle at 85% 20%,rgba(110,70,230,.20),transparent 30%),
+        radial-gradient(circle at 50% 90%,rgba(20,120,200,.15),transparent 35%),
+        #050812;
+    line-height:1.6;
+}
+
+.container{
+    width:min(1150px,92%);
+    margin:auto;
+}
+
+/* NAV */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(14px);
+    background:rgba(5,8,18,.86);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav-inner{
+    width:min(1150px,92%);
+    height:64px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#55d9ff;
+}
+
+.back{
+    text-decoration:none;
+    padding:8px 15px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:999px;
+    transition:.25s;
+}
+
+.back:hover{
+    background:rgba(255,255,255,.1);
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:85px 0 65px;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 15px;
+    border:1px solid rgba(80,210,255,.3);
+    border-radius:999px;
+    color:#86e5ff;
+    background:rgba(50,180,255,.07);
+    font-size:13px;
+    letter-spacing:1px;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:clamp(42px,8vw,78px);
+    line-height:1;
+    margin-bottom:20px;
+    background:linear-gradient(90deg,#fff,#a9edff,#68cfff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:760px;
+    margin:auto;
+    color:#aebbd0;
+    font-size:18px;
+}
+
+/* INTRO */
+
+.intro{
+    margin-bottom:35px;
+    padding:25px;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:18px;
+    background:rgba(255,255,255,.04);
+}
+
+.intro h2{
+    margin-bottom:8px;
+}
+
+/* CATEGORY NAV */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+    margin-bottom:40px;
+}
+
+.category{
+    padding:18px 10px;
+    text-align:center;
+    cursor:pointer;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,.09);
+    background:rgba(255,255,255,.04);
+    transition:.25s;
+}
+
+.category:hover{
+    transform:translateY(-3px);
+    background:rgba(80,200,255,.08);
+    border-color:rgba(80,210,255,.3);
+}
+
+.category.active{
+    background:rgba(70,190,255,.13);
+    border-color:#52d8ff;
+}
+
+.category .icon{
+    display:block;
+    font-size:27px;
+    margin-bottom:5px;
+}
+
+/* SECTIONS */
+
+.physics-section{
+    display:none;
+    margin-bottom:70px;
+}
+
+.physics-section.active{
+    display:block;
+}
+
+.section-title{
+    margin-bottom:25px;
+}
+
+.section-title h2{
+    font-size:32px;
+}
+
+.section-title p{
+    color:#8f9db4;
+}
+
+/* FORMULA GRID */
+
+.formula-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+/* FORMULA CARD */
+
+.formula-card{
+    padding:24px;
+    border-radius:18px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.09);
+}
+
+.formula-card h3{
+    color:#fff;
+    margin-bottom:8px;
+}
+
+.formula{
+    padding:14px;
+    margin:12px 0 18px;
+    text-align:center;
+    border-radius:10px;
+    background:rgba(50,190,255,.07);
+    border-left:3px solid #50d8ff;
+    color:#bdefff;
+    font-family:Georgia,serif;
+    font-size:22px;
+    overflow-x:auto;
+}
+
+.description{
+    color:#8997ae;
+    font-size:14px;
+    margin-bottom:16px;
+}
+
+/* INPUTS */
+
+.inputs{
+    display:grid;
+    gap:10px;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.input-group label{
+    color:#aebbd0;
+    font-size:13px;
+}
+
+.input-group input{
+    width:100%;
+    padding:11px 12px;
+    border-radius:9px;
+    border:1px solid rgba(255,255,255,.12);
+    outline:none;
+    background:#090f1d;
+    color:#fff;
+    font-size:15px;
+}
+
+.input-group input:focus{
+    border-color:#52d8ff;
+    box-shadow:0 0 0 2px rgba(80,210,255,.08);
+}
+
+.calculate{
+    width:100%;
+    margin-top:14px;
+    padding:11px;
+    border:0;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+    color:#031018;
+    background:#62dcff;
+    transition:.2s;
+}
+
+.calculate:hover{
+    transform:translateY(-1px);
+    filter:brightness(1.08);
+}
+
+.result{
+    display:none;
+    margin-top:12px;
+    padding:13px;
+    border-radius:9px;
+    background:rgba(60,220,150,.08);
+    border:1px solid rgba(60,220,150,.2);
+    color:#9ff5cf;
+}
+
+.result.show{
+    display:block;
+}
+
+/* CONSTANTS */
+
+.constants{
+    margin-top:40px;
+    padding:25px;
+    border-radius:18px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.constants h2{
+    margin-bottom:18px;
+}
+
+.constants-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:10px;
+}
+
+.constant{
+    padding:13px;
+    border-radius:10px;
+    background:rgba(255,255,255,.04);
+}
+
+.constant span{
+    display:block;
+    color:#7f8ca3;
+    font-size:13px;
+}
+
+.constant strong{
+    color:#c5f3ff;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:50px;
+    padding:35px 0;
+    text-align:center;
+    color:#718098;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:500px){
+
+    .nav-inner{
+        height:58px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .back{
+        font-size:13px;
+        padding:7px 11px;
+    }
+
+    .hero{
+        padding:60px 0 45px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .formula-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-title h2{
+        font-size:27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-inner">
+
+        <div class="logo">
+            COSMIC<span>ARCHIVE</span>
+        </div>
+
+        <a href="index.html" class="back">
+            ← Back to Universe
+        </a>
+
+    </div>
+</nav>
+
+
+<header class="hero">
+
+    <div class="container">
+
+        <div class="badge">
+            PHYSICS LAB
+        </div>
+
+        <h1>PHYSICS CALCULATOR</h1>
+
+        <p>
+            Calculate physical quantities using fundamental equations
+            from mechanics, thermodynamics, electromagnetism, optics
+            and modern physics.
+        </p>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+<div class="intro">
+
+<h2>⚡ Physics Formula Laboratory</h2>
+
+<p style="color:#9aa8bd;">
+Select a branch of physics and choose a formula.
+Enter the required values and the calculator will solve it instantly.
+</p>
+
+</div>
+
+
+<!-- CATEGORY BUTTONS -->
+
+<div class="categories">
+
+<div class="category active" onclick="showSection('mechanics',this)">
+<span class="icon">⚙️</span>
+Mechanics
+</div>
+
+<div class="category" onclick="showSection('thermo',this)">
+<span class="icon">🌡️</span>
+Thermodynamics
+</div>
+
+<div class="category" onclick="showSection('electro',this)">
+<span class="icon">⚡</span>
+Electromagnetism
+</div>
+
+<div class="category" onclick="showSection('optics',this)">
+<span class="icon">🔭</span>
+Optics
+</div>
+
+<div class="category" onclick="showSection('modern',this)">
+<span class="icon">⚛️</span>
+Modern Physics
+</div>
+
+</div>
+
+
+<!-- ================= MECHANICS ================= -->
+
+<section id="mechanics" class="physics-section active">
+
+<div class="section-title">
+
+<h2>⚙️ Mechanics</h2>
+
+<p>
+Motion, forces, energy, momentum and gravitation.
+</p>
+
+</div>
+
+
+<div class="formula-grid">
+
+
+<!-- SPEED -->
+
+<div class="formula-card">
+
+<h3>Speed</h3>
+
+<div class="formula">
+v = s / t
+</div>
+
+<p class="description">
+Calculate average speed.
+</p>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Distance s (m)</label>
+<input id="speed_s" type="number">
+</div>
+
+<div class="input-group">
+<label>Time t (s)</label>
+<input id="speed_t" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="speedCalc()">
+Calculate
+</button>
+
+<div id="speed_result" class="result"></div>
+
+</div>
+
+
+<!-- FORCE -->
+
+<div class="formula-card">
+
+<h3>Newton's Second Law</h3>
+
+<div class="formula">
+F = ma
+</div>
+
+<p class="description">
+Calculate force from mass and acceleration.
+</p>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Mass m (kg)</label>
+<input id="force_m" type="number">
+</div>
+
+<div class="input-group">
+<label>Acceleration a (m/s²)</label>
+<input id="force_a" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="forceCalc()">
+Calculate
+</button>
+
+<div id="force_result" class="result"></div>
+
+</div>
+
+
+<!-- KINETIC -->
+
+<div class="formula-card">
+
+<h3>Kinetic Energy</h3>
+
+<div class="formula">
+KE = ½mv²
+</div>
+
+<p class="description">
+Energy of an object in motion.
+</p>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Mass m (kg)</label>
+<input id="ke_m" type="number">
+</div>
+
+<div class="input-group">
+<label>Velocity v (m/s)</label>
+<input id="ke_v" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="keCalc()">
+Calculate
+</button>
+
+<div id="ke_result" class="result"></div>
+
+</div>
+
+
+<!-- POTENTIAL -->
+
+<div class="formula-card">
+
+<h3>Gravitational Potential Energy</h3>
+
+<div class="formula">
+PE = mgh
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Mass m (kg)</label>
+<input id="pe_m" type="number">
+</div>
+
+<div class="input-group">
+<label>Height h (m)</label>
+<input id="pe_h" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="peCalc()">
+Calculate
+</button>
+
+<div id="pe_result" class="result"></div>
+
+</div>
+
+
+<!-- MOMENTUM -->
+
+<div class="formula-card">
+
+<h3>Momentum</h3>
+
+<div class="formula">
+p = mv
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Mass m (kg)</label>
+<input id="mom_m" type="number">
+</div>
+
+<div class="input-group">
+<label>Velocity v (m/s)</label>
+<input id="mom_v" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="momCalc()">
+Calculate
+</button>
+
+<div id="mom_result" class="result"></div>
+
+</div>
+
+
+<!-- GRAVITY -->
+
+<div class="formula-card">
+
+<h3>Universal Gravitation</h3>
+
+<div class="formula">
+F = Gm₁m₂ / r²
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Mass m₁ (kg)</label>
+<input id="grav_m1" type="number">
+</div>
+
+<div class="input-group">
+<label>Mass m₂ (kg)</label>
+<input id="grav_m2" type="number">
+</div>
+
+<div class="input-group">
+<label>Distance r (m)</label>
+<input id="grav_r" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="gravityCalc()">
+Calculate
+</button>
+
+<div id="grav_result" class="result"></div>
+
+</div>
+
+
+<!-- WORK -->
+
+<div class="formula-card">
+
+<h3>Work</h3>
+
+<div class="formula">
+W = Fs
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Force F (N)</label>
+<input id="work_f" type="number">
+</div>
+
+<div class="input-group">
+<label>Distance s (m)</label>
+<input id="work_s" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="workCalc()">
+Calculate
+</button>
+
+<div id="work_result" class="result"></div>
+
+</div>
+
+
+<!-- POWER -->
+
+<div class="formula-card">
+
+<h3>Mechanical Power</h3>
+
+<div class="formula">
+P = W / t
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Work W (J)</label>
+<input id="power_w" type="number">
+</div>
+
+<div class="input-group">
+<label>Time t (s)</label>
+<input id="power_t" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="powerCalc()">
+Calculate
+</button>
+
+<div id="power_result" class="result"></div>
+
+</div>
+
+
+</div>
+</section>
+
+
+<!-- ================= THERMODYNAMICS ================= -->
+
+<section id="thermo" class="physics-section">
+
+<div class="section-title">
+
+<h2>🌡️ Thermodynamics</h2>
+
+<p>
+Heat, temperature, gases and thermodynamic energy.
+</p>
+
+</div>
+
+
+<div class="formula-grid">
+
+
+<!-- HEAT -->
+
+<div class="formula-card">
+
+<h3>Heat Energy</h3>
+
+<div class="formula">
+Q = mcΔT
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Mass m (kg)</label>
+<input id="heat_m" type="number">
+</div>
+
+<div class="input-group">
+<label>Specific Heat c (J/kg·K)</label>
+<input id="heat_c" type="number">
+</div>
+
+<div class="input-group">
+<label>Temperature change ΔT (K)</label>
+<input id="heat_dt" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="heatCalc()">
+Calculate
+</button>
+
+<div id="heat_result" class="result"></div>
+
+</div>
+
+
+<!-- LATENT HEAT -->
+
+<div class="formula-card">
+
+<h3>Latent Heat</h3>
+
+<div class="formula">
+Q = mL
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Mass m (kg)</label>
+<input id="latent_m" type="number">
+</div>
+
+<div class="input-group">
+<label>Specific Latent Heat L (J/kg)</label>
+<input id="latent_l" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="latentCalc()">
+Calculate
+</button>
+
+<div id="latent_result" class="result"></div>
+
+</div>
+
+
+<!-- IDEAL GAS -->
+
+<div class="formula-card">
+
+<h3>Ideal Gas Law</h3>
+
+<div class="formula">
+PV = nRT
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Pressure P (Pa)</label>
+<input id="gas_p" type="number">
+</div>
+
+<div class="input-group">
+<label>Volume V (m³)</label>
+<input id="gas_v" type="number">
+</div>
+
+<div class="input-group">
+<label>Amount n (mol)</label>
+<input id="gas_n" type="number">
+</div>
+
+<div class="input-group">
+<label>Temperature T (K)</label>
+<input id="gas_t" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="gasCalc()">
+Calculate P
+</button>
+
+<div id="gas_result" class="result"></div>
+
+</div>
+
+
+<!-- EFFICIENCY -->
+
+<div class="formula-card">
+
+<h3>Efficiency</h3>
+
+<div class="formula">
+η = (W / Q) × 100%
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Useful Energy W (J)</label>
+<input id="eff_w" type="number">
+</div>
+
+<div class="input-group">
+<label>Input Energy Q (J)</label>
+<input id="eff_q" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="effCalc()">
+Calculate
+</button>
+
+<div id="eff_result" class="result"></div>
+
+</div>
+
+
+</div>
+</section>
+
+
+<!-- ================= ELECTROMAGNETISM ================= -->
+
+<section id="electro" class="physics-section">
+
+<div class="section-title">
+
+<h2>⚡ Electromagnetism</h2>
+
+<p>
+Electric current, voltage, resistance, power and electromagnetic forces.
+</p>
+
+</div>
+
+
+<div class="formula-grid">
+
+
+<!-- OHM -->
+
+<div class="formula-card">
+
+<h3>Ohm's Law</h3>
+
+<div class="formula">
+V = IR
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Current I (A)</label>
+<input id="ohm_i" type="number">
+</div>
+
+<div class="input-group">
+<label>Resistance R (Ω)</label>
+<input id="ohm_r" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="ohmCalc()">
+Calculate Voltage
+</button>
+
+<div id="ohm_result" class="result"></div>
+
+</div>
+
+
+<!-- POWER -->
+
+<div class="formula-card">
+
+<h3>Electrical Power</h3>
+
+<div class="formula">
+P = VI
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Voltage V (V)</label>
+<input id="ep_v" type="number">
+</div>
+
+<div class="input-group">
+<label>Current I (A)</label>
+<input id="ep_i" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="ePowerCalc()">
+Calculate
+</button>
+
+<div id="ep_result" class="result"></div>
+
+</div>
+
+
+<!-- CHARGE -->
+
+<div class="formula-card">
+
+<h3>Electric Charge</h3>
+
+<div class="formula">
+Q = It
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Current I (A)</label>
+<input id="charge_i" type="number">
+</div>
+
+<div class="input-group">
+<label>Time t (s)</label>
+<input id="charge_t" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="chargeCalc()">
+Calculate
+</button>
+
+<div id="charge_result" class="result"></div>
+
+</div>
+
+
+<!-- ELECTRIC FORCE -->
+
+<div class="formula-card">
+
+<h3>Electric Force</h3>
+
+<div class="formula">
+F = kq₁q₂ / r²
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Charge q₁ (C)</label>
+<input id="ef_q1" type="number">
+</div>
+
+<div class="input-group">
+<label>Charge q₂ (C)</label>
+<input id="ef_q2" type="number">
+</div>
+
+<div class="input-group">
+<label>Distance r (m)</label>
+<input id="ef_r" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="electricForceCalc()">
+Calculate
+</button>
+
+<div id="ef_result" class="result"></div>
+
+</div>
+
+
+<!-- WIRE RESISTANCE -->
+
+<div class="formula-card">
+
+<h3>Wire Resistance</h3>
+
+<div class="formula">
+R = ρL / A
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Resistivity ρ (Ω·m)</label>
+<input id="wire_rho" type="number">
+</div>
+
+<div class="input-group">
+<label>Length L (m)</label>
+<input id="wire_l" type="number">
+</div>
+
+<div class="input-group">
+<label>Area A (m²)</label>
+<input id="wire_a" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="wireCalc()">
+Calculate
+</button>
+
+<div id="wire_result" class="result"></div>
+
+</div>
+
+
+<!-- ELECTRIC FIELD -->
+
+<div class="formula-card">
+
+<h3>Electric Field Force</h3>
+
+<div class="formula">
+F = qE
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Charge q (C)</label>
+<input id="field_q" type="number">
+</div>
+
+<div class="input-group">
+<label>Electric Field E (N/C)</label>
+<input id="field_e" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="fieldCalc()">
+Calculate
+</button>
+
+<div id="field_result" class="result"></div>
+
+</div>
+
+
+</div>
+</section>
+
+
+<!-- ================= OPTICS ================= -->
+
+<section id="optics" class="physics-section">
+
+<div class="section-title">
+
+<h2>🔭 Optics</h2>
+
+<p>
+Light, lenses, refraction and electromagnetic waves.
+</p>
+
+</div>
+
+
+<div class="formula-grid">
+
+
+<!-- WAVE -->
+
+<div class="formula-card">
+
+<h3>Wave Speed</h3>
+
+<div class="formula">
+v = fλ
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Frequency f (Hz)</label>
+<input id="wave_f" type="number">
+</div>
+
+<div class="input-group">
+<label>Wavelength λ (m)</label>
+<input id="wave_l" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="waveCalc()">
+Calculate
+</button>
+
+<div id="wave_result" class="result"></div>
+
+</div>
+
+
+<!-- REFRACTIVE INDEX -->
+
+<div class="formula-card">
+
+<h3>Refractive Index</h3>
+
+<div class="formula">
+n = c / v
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Light speed in material v (m/s)</label>
+<input id="index_v" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="indexCalc()">
+Calculate
+</button>
+
+<div id="index_result" class="result"></div>
+
+</div>
+
+
+<!-- LENS -->
+
+<div class="formula-card">
+
+<h3>Thin Lens Equation</h3>
+
+<div class="formula">
+1/f = 1/d₀ + 1/dᵢ
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Focal length f (m)</label>
+<input id="lens_f" type="number">
+</div>
+
+<div class="input-group">
+<label>Object distance d₀ (m)</label>
+<input id="lens_do" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="lensCalc()">
+Calculate Image Distance
+</button>
+
+<div id="lens_result" class="result"></div>
+
+</div>
+
+
+<!-- SNELL -->
+
+<div class="formula-card">
+
+<h3>Snell's Law</h3>
+
+<div class="formula">
+n₁sinθ₁ = n₂sinθ₂
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>n₁</label>
+<input id="snell_n1" type="number">
+</div>
+
+<div class="input-group">
+<label>θ₁ (degrees)</label>
+<input id="snell_a1" type="number">
+</div>
+
+<div class="input-group">
+<label>n₂</label>
+<input id="snell_n2" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="snellCalc()">
+Calculate θ₂
+</button>
+
+<div id="snell_result" class="result"></div>
+
+</div>
+
+
+</div>
+</section>
+
+
+<!-- ================= MODERN PHYSICS ================= -->
+
+<section id="modern" class="physics-section">
+
+<div class="section-title">
+
+<h2>⚛️ Modern Physics</h2>
+
+<p>
+Relativity, quantum physics, photons and mass-energy equivalence.
+</p>
+
+</div>
+
+
+<div class="formula-grid">
+
+
+<!-- E MC2 -->
+
+<div class="formula-card">
+
+<h3>Mass–Energy Equivalence</h3>
+
+<div class="formula">
+E = mc²
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Mass m (kg)</label>
+<input id="mc_m" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="mcCalc()">
+Calculate
+</button>
+
+<div id="mc_result" class="result"></div>
+
+</div>
+
+
+<!-- PHOTON -->
+
+<div class="formula-card">
+
+<h3>Photon Energy</h3>
+
+<div class="formula">
+E = hf
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Frequency f (Hz)</label>
+<input id="photon_f" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="photonCalc()">
+Calculate
+</button>
+
+<div id="photon_result" class="result"></div>
+
+</div>
+
+
+<!-- DE BROGLIE -->
+
+<div class="formula-card">
+
+<h3>de Broglie Wavelength</h3>
+
+<div class="formula">
+λ = h / p
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Momentum p (kg·m/s)</label>
+<input id="debroglie_p" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="debroglieCalc()">
+Calculate
+</button>
+
+<div id="debroglie_result" class="result"></div>
+
+</div>
+
+
+<!-- PHOTON WAVELENGTH -->
+
+<div class="formula-card">
+
+<h3>Photon Wavelength</h3>
+
+<div class="formula">
+λ = c / f
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Frequency f (Hz)</label>
+<input id="photonwave_f" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="photonWaveCalc()">
+Calculate
+</button>
+
+<div id="photonwave_result" class="result"></div>
+
+</div>
+
+
+<!-- HALF LIFE -->
+
+<div class="formula-card">
+
+<h3>Radioactive Decay</h3>
+
+<div class="formula">
+N = N₀(½)^(t/T½)
+</div>
+
+<div class="inputs">
+
+<div class="input-group">
+<label>Initial amount N₀</label>
+<input id="decay_n0" type="number">
+</div>
+
+<div class="input-group">
+<label>Time t</label>
+<input id="decay_t" type="number">
+</div>
+
+<div class="input-group">
+<label>Half-life T½</label>
+<input id="decay_half" type="number">
+</div>
+
+</div>
+
+<button class="calculate" onclick="decayCalc()">
+Calculate
+</button>
+
+<div id="decay_result" class="result"></div>
+
+</div>
+
+
+</div>
+</section>
+
+
+<!-- CONSTANTS -->
+
+<div class="constants">
+
+<h2>🔬 Physical Constants</h2>
+
+<div class="constants-grid">
+
+<div class="constant">
+<span>Speed of light</span>
+<strong>c = 299,792,458 m/s</strong>
+</div>
+
+<div class="constant">
+<span>Gravitational constant</span>
+<strong>G = 6.67430 × 10⁻¹¹</strong>
+</div>
+
+<div class="constant">
+<span>Planck constant</span>
+<strong>h = 6.62607015 × 10⁻³⁴ J·s</strong>
+</div>
+
+<div class="constant">
+<span>Electron charge</span>
+<strong>e = 1.602176634 × 10⁻¹⁹ C</strong>
+</div>
+
+<div class="constant">
+<span>Coulomb constant</span>
+<strong>k ≈ 8.9875517923 × 10⁹</strong>
+</div>
+
+<div class="constant">
+<span>Earth gravity</span>
+<strong>g ≈ 9.80665 m/s²</strong>
+</div>
+
+<div class="constant">
+<span>Gas constant</span>
+<strong>R = 8.314462618 J/(mol·K)</strong>
+</div>
+
+</div>
+
+</div>
+
+
+</main>
+
+
+<footer>
+
+COSMIC ARCHIVE · PHYSICS LAB<br>
+Explore the equations that describe our universe.
+
+</footer>
+
+
+<script>
+
+/* CONSTANTS */
+
+const G = 6.67430e-11;
+const g = 9.80665;
+const c = 299792458;
+const h = 6.62607015e-34;
+const k = 8.9875517923e9;
+const R = 8.314462618;
+
+
+/* SECTION SWITCH */
+
+function showSection(id,element){
+
+    document.querySelectorAll(".physics-section")
+        .forEach(section=>{
+            section.classList.remove("active");
+        });
+
+    document.getElementById(id).classList.add("active");
+
+    document.querySelectorAll(".category")
+        .forEach(button=>{
+            button.classList.remove("active");
+        });
+
+    element.classList.add("active");
+
+    window.scrollTo({
+        top:document.querySelector(".categories").offsetTop - 90,
+        behavior:"smooth"
+    });
+}
+
+
+/* RESULT */
+
+function result(id,text){
+
+    const box=document.getElementById(id);
+
+    box.innerHTML=text;
+
+    box.classList.add("show");
+}
+
+
+/* SPEED */
+
+function speedCalc(){
+
+    const s=Number(document.getElementById("speed_s").value);
+    const t=Number(document.getElementById("speed_t").value);
+
+    if(t<=0){
+        result("speed_result","⚠️ Time must be greater than zero.");
+        return;
+    }
+
+    result(
+        "speed_result",
+        `v = ${format(s/t)} m/s`
+    );
+}
+
+
+/* FORCE */
+
+function forceCalc(){
+
+    const m=Number(document.getElementById("force_m").value);
+    const a=Number(document.getElementById("force_a").value);
+
+    result(
+        "force_result",
+        `F = ${format(m*a)} N`
+    );
+}
+
+
+/* KINETIC */
+
+function keCalc(){
+
+    const m=Number(document.getElementById("ke_m").value);
+    const v=Number(document.getElementById("ke_v").value);
+
+    result(
+        "ke_result",
+        `KE = ${format(0.5*m*v*v)} J`
+    );
+}
+
+
+/* POTENTIAL */
+
+function peCalc(){
+
+    const m=Number(document.getElementById("pe_m").value);
+    const height=Number(document.getElementById("pe_h").value);
+
+    result(
+        "pe_result",
+        `PE = ${format(m*g*height)} J`
+    );
+}
+
+
+/* MOMENTUM */
+
+function momCalc(){
+
+    const m=Number(document.getElementById("mom_m").value);
+    const v=Number(document.getElementById("mom_v").value);
+
+    result(
+        "mom_result",
+        `p = ${format(m*v)} kg·m/s`
+    );
+}
+
+
+/* GRAVITY */
+
+function gravityCalc(){
+
+    const m1=Number(document.getElementById("grav_m1").value);
+    const m2=Number(document.getElementById("grav_m2").value);
+    const r=Number(document.getElementById("grav_r").value);
+
+    if(r<=0){
+        result("grav_result","⚠️ Distance must be greater than zero.");
+        return;
+    }
+
+    const F=G*m1*m2/(r*r);
+
+    result(
+        "grav_result",
+        `F = ${format(F)} N`
+    );
+}
+
+
+/* WORK */
+
+function workCalc(){
+
+    const F=Number(document.getElementById("work_f").value);
+    const s=Number(document.getElementById("work_s").value);
+
+    result(
+        "work_result",
+        `W = ${format(F*s)} J`
+    );
+}
+
+
+/* POWER */
+
+function powerCalc(){
+
+    const W=Number(document.getElementById("power_w").value);
+    const t=Number(document.getElementById("power_t").value);
+
+    if(t<=0){
+        result("power_result","⚠️ Time must be greater than zero.");
+        return;
+    }
+
+    result(
+        "power_result",
+        `P = ${format(W/t)} W`
+    );
+}
+
+
+/* HEAT */
+
+function heatCalc(){
+
+    const m=Number(document.getElementById("heat_m").value);
+    const cp=Number(document.getElementById("heat_c").value);
+    const dt=Number(document.getElementById("heat_dt").value);
+
+    result(
+        "heat_result",
+        `Q = ${format(m*cp*dt)} J`
+    );
+}
+
+
+/* LATENT HEAT */
+
+function latentCalc(){
+
+    const m=Number(document.getElementById("latent_m").value);
+    const L=Number(document.getElementById("latent_l").value);
+
+    result(
+        "latent_result",
+        `Q = ${format(m*L)} J`
+    );
+}
+
+
+/* IDEAL GAS */
+
+function gasCalc(){
+
+    const P=Number(document.getElementById("gas_p").value);
+    const V=Number(document.getElementById("gas_v").value);
+    const n=Number(document.getElementById("gas_n").value);
+    const T=Number(document.getElementById("gas_t").value);
+
+    if(V<=0){
+        result("gas_result","⚠️ Volume must be greater than zero.");
+        return;
+    }
+
+    result(
+        "gas_result",
+        `P = ${format(n*R*T/V)} Pa`
+    );
+}
+
+
+/* EFFICIENCY */
+
+function effCalc(){
+
+    const W=Number(document.getElementById("eff_w").value);
+    const Q=Number(document.getElementById("eff_q").value);
+
+    if(Q<=0){
+        result("eff_result","⚠️ Input energy must be greater than zero.");
+        return;
+    }
+
+    result(
+        "eff_result",
+        `η = ${format((W/Q)*100)} %`
+    );
+}
+
+
+/* OHM */
+
+function ohmCalc(){
+
+    const I=Number(document.getElementById("ohm_i").value);
+    const resistance=Number(document.getElementById("ohm_r").value);
+
+    result(
+        "ohm_result",
+        `V = ${format(I*resistance)} V`
+    );
+}
+
+
+/* ELECTRICAL POWER */
+
+function ePowerCalc(){
+
+    const V=Number(document.getElementById("ep_v").value);
+    const I=Number(document.getElementById("ep_i").value);
+
+    result(
+        "ep_result",
+        `P = ${format(V*I)} W`
+    );
+}
+
+
+/* CHARGE */
+
+function chargeCalc(){
+
+    const I=Number(document.getElementById("charge_i").value);
+    const t=Number(document.getElementById("charge_t").value);
+
+    result(
+        "charge_result",
+        `Q = ${format(I*t)} C`
+    );
+}
+
+
+/* ELECTRIC FORCE */
+
+function electricForceCalc(){
+
+    const q1=Number(document.getElementById("ef_q1").value);
+    const q2=Number(document.getElementById("ef_q2").value);
+    const r=Number(document.getElementById("ef_r").value);
+
+    if(r<=0){
+        result("ef_result","⚠️ Distance must be greater than zero.");
+        return;
+    }
+
+    const F=k*q1*q2/(r*r);
+
+    result(
+        "ef_result",
+        `F = ${format(F)} N`
+    );
+}
+
+
+/* WIRE RESISTANCE */
+
+function wireCalc(){
+
+    const rho=Number(document.getElementById("wire_rho").value);
+    const L=Number(document.getElementById("wire_l").value);
+    const A=Number(document.getElementById("wire_a").value);
+
+    if(A<=0){
+        result("wire_result","⚠️ Area must be greater than zero.");
+        return;
+    }
+
+    result(
+        "wire_result",
+        `R = ${format(rho*L/A)} Ω`
+    );
+}
+
+
+/* ELECTRIC FIELD */
+
+function fieldCalc(){
+
+    const q=Number(document.getElementById("field_q").value);
+    const E=Number(document.getElementById("field_e").value);
+
+    result(
+        "field_result",
+        `F = ${format(q*E)} N`
+    );
+}
+
+
+/* WAVE */
+
+function waveCalc(){
+
+    const frequency=Number(document.getElementById("wave_f").value);
+    const wavelength=Number(document.getElementById("wave_l").value);
+
+    result(
+        "wave_result",
+        `v = ${format(frequency*wavelength)} m/s`
+    );
+}
+
+
+/* REFRACTIVE INDEX */
+
+function indexCalc(){
+
+    const velocity=Number(document.getElementById("index_v").value);
+
+    if(velocity<=0){
+        result("index_result","⚠️ Speed must be greater than zero.");
+        return;
+    }
+
+    result(
+        "index_result",
+        `n = ${format(c/velocity)}`
+    );
+}
+
+
+/* LENS */
+
+function lensCalc(){
+
+    const f=Number(document.getElementById("lens_f").value);
+    const do_=Number(document.getElementById("lens_do").value);
+
+    if(f===0 || do_===0){
+        result("lens_result","⚠️ Values cannot be zero.");
+        return;
+    }
+
+    const di=1/(1/f-1/do_);
+
+    result(
+        "lens_result",
+        `dᵢ = ${format(di)} m`
+    );
+}
+
+
+/* SNELL */
+
+function snellCalc(){
+
+    const n1=Number(document.getElementById("snell_n1").value);
+    const a1=Number(document.getElementById("snell_a1").value);
+    const n2=Number(document.getElementById("snell_n2").value);
+
+    const value=n1*Math.sin(a1*Math.PI/180)/n2;
+
+    if(value<-1 || value>1){
+        result(
+            "snell_result",
+            "⚠️ No real refracted angle for these values."
+        );
+        return;
+    }
+
+    const a2=Math.asin(value)*180/Math.PI;
+
+    result(
+        "snell_result",
+        `θ₂ = ${format(a2)}°`
+    );
+}
+
+
+/* E = MC² */
+
+function mcCalc(){
+
+    const m=Number(document.getElementById("mc_m").value);
+
+    result(
+        "mc_result",
+        `E = ${formatScientific(m*c*c)} J`
+    );
+}
+
+
+/* PHOTON ENERGY */
+
+function photonCalc(){
+
+    const frequency=Number(
+        document.getElementById("photon_f").value
+    );
+
+    result(
+        "photon_result",
+        `E = ${formatScientific(h*frequency)} J`
+    );
+}
+
+
+/* DE BROGLIE */
+
+function debroglieCalc(){
+
+    const p=Number(
+        document.getElementById("debroglie_p").value
+    );
+
+    if(p<=0){
+        result(
+            "debroglie_result",
+            "⚠️ Momentum must be greater than zero."
+        );
+        return;
+    }
+
+    result(
+        "debroglie_result",
+        `λ = ${formatScientific(h/p)} m`
+    );
+}
+
+
+/* PHOTON WAVELENGTH */
+
+function photonWaveCalc(){
+
+    const frequency=Number(
+        document.getElementById("photonwave_f").value
+    );
+
+    if(frequency<=0){
+        result(
+            "photonwave_result",
+            "⚠️ Frequency must be greater than zero."
+        );
+        return;
+    }
+
+    result(
+        "photonwave_result",
+        `λ = ${formatScientific(c/frequency)} m`
+    );
+}
+
+
+/* RADIOACTIVE DECAY */
+
+function decayCalc(){
+
+    const N0=Number(
+        document.getElementById("decay_n0").value
+    );
+
+    const time=Number(
+        document.getElementById("decay_t").value
+    );
+
+    const half=Number(
+        document.getElementById("decay_half").value
+    );
+
+    if(half<=0){
+        result(
+            "decay_result",
+            "⚠️ Half-life must be greater than zero."
+        );
+        return;
+    }
+
+    const N=N0*Math.pow(0.5,time/half);
+
+    result(
+        "decay_result",
+        `N = ${format(N)}`
+    );
+}
+
+
+/* NUMBER FORMAT */
+
+function format(value){
+
+    if(!Number.isFinite(value)){
+        return "Invalid value";
+    }
+
+    return Number(value.toPrecision(8)).toLocaleString(
+        "en-US",
+        {
+            maximumFractionDigits:8
+        }
+    );
+}
+
+
+/* SCIENTIFIC FORMAT */
+
+function formatScientific(value){
+
+    if(!Number.isFinite(value)){
+        return "Invalid value";
+    }
+
+    return value.toExponential(6);
+}
+
+</script>
+
+</body>
+</html>
