@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Supernovae | Cosmic Archive</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    color:#eaf2ff;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(104,55,180,.28), transparent 30%),
+        radial-gradient(circle at 85% 25%, rgba(255,75,75,.16), transparent 28%),
+        radial-gradient(circle at 50% 90%, rgba(40,90,190,.20), transparent 32%),
+        #050812;
+    line-height:1.75;
+}
+
+a{
+    color:inherit;
+}
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+/* NAVBAR */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(14px);
+    background:rgba(5,8,18,.82);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav-inner{
+    width:min(1100px,92%);
+    margin:auto;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#ff6575;
+}
+
+.back{
+    text-decoration:none;
+    padding:9px 16px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:999px;
+    transition:.25s;
+}
+
+.back:hover{
+    background:rgba(255,255,255,.1);
+}
+
+/* HERO */
+
+.hero{
+    min-height:520px;
+    display:flex;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:480px;
+    height:480px;
+    border-radius:50%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:
+        radial-gradient(circle,
+        rgba(255,220,150,.9) 0%,
+        rgba(255,105,70,.55) 18%,
+        rgba(160,40,70,.28) 38%,
+        transparent 70%);
+    filter:blur(10px);
+    opacity:.75;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:100%;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 15px;
+    border-radius:999px;
+    border:1px solid rgba(255,120,120,.3);
+    background:rgba(255,70,70,.08);
+    color:#ff9b9b;
+    font-size:13px;
+    letter-spacing:1px;
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:clamp(46px,8vw,86px);
+    line-height:1;
+    margin-bottom:22px;
+    background:linear-gradient(90deg,#fff,#ffb4a9,#ff6677);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:760px;
+    margin:auto;
+    color:#b9c5da;
+    font-size:18px;
+}
+
+/* CONTENT */
+
+main{
+    padding-bottom:80px;
+}
+
+.toc{
+    margin:35px 0 60px;
+    padding:25px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:18px;
+}
+
+.toc h2{
+    margin-bottom:15px;
+    color:#fff;
+}
+
+.toc-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:8px 25px;
+}
+
+.toc a{
+    color:#aebbd2;
+    text-decoration:none;
+}
+
+.toc a:hover{
+    color:#ff8995;
+}
+
+section{
+    margin-bottom:65px;
+    scroll-margin-top:85px;
+}
+
+section h2{
+    font-size:32px;
+    margin-bottom:18px;
+    color:#fff;
+}
+
+section h3{
+    font-size:22px;
+    margin:28px 0 10px;
+    color:#ffd0cb;
+}
+
+section p{
+    color:#b8c4d8;
+    margin-bottom:15px;
+}
+
+strong{
+    color:#fff;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+    margin:25px 0;
+}
+
+.card{
+    padding:23px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:17px;
+}
+
+.card h3{
+    margin:0 0 8px;
+    color:#fff;
+}
+
+.card p{
+    margin:0;
+    font-size:15px;
+}
+
+/* FORMULA */
+
+.formula{
+    margin:25px 0;
+    padding:22px;
+    text-align:center;
+    font-family:Georgia,serif;
+    font-size:25px;
+    color:#ffd6d0;
+    background:rgba(255,90,90,.06);
+    border-left:4px solid #ff6677;
+    border-radius:10px;
+    overflow-x:auto;
+}
+
+/* TABLE */
+
+.table-wrap{
+    overflow-x:auto;
+    margin:25px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+    background:rgba(255,255,255,.035);
+    border-radius:12px;
+    overflow:hidden;
+}
+
+th,td{
+    padding:14px;
+    text-align:left;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+th{
+    color:#ffd1cc;
+    background:rgba(255,90,90,.08);
+}
+
+td{
+    color:#b9c5d8;
+}
+
+/* HIGHLIGHT */
+
+.highlight{
+    margin:25px 0;
+    padding:24px;
+    border-radius:16px;
+    background:linear-gradient(
+        135deg,
+        rgba(255,80,80,.10),
+        rgba(120,70,180,.08)
+    );
+    border:1px solid rgba(255,130,130,.15);
+}
+
+.highlight strong{
+    color:#ff9c9c;
+}
+
+/* FOOTER */
+
+footer{
+    padding:35px 0;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#78859c;
+    font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .nav-inner{
+        height:58px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .back{
+        font-size:13px;
+        padding:7px 12px;
+    }
+
+    .hero{
+        min-height:450px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    section h2{
+        font-size:27px;
+    }
+
+    .formula{
+        font-size:21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <div class="logo">COSMIC<span>ARCHIVE</span></div>
+        <a href="index.html" class="back">← Back to Universe</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content container">
+        <div class="badge">STELLAR EXPLOSIONS</div>
+
+        <h1>SUPERNOVAE</h1>
+
+        <p>
+            The spectacular deaths of stars — explosions powerful enough
+            to illuminate entire galaxies and create many of the elements
+            found throughout the universe.
+        </p>
+    </div>
+</header>
+
+<main class="container">
+
+<div class="toc">
+
+<h2>Contents</h2>
+
+<div class="toc-grid">
+<a href="#what">1. What Is a Supernova?</a>
+<a href="#types">2. Types of Supernovae</a>
+<a href="#collapse">3. Core-Collapse Supernovae</a>
+<a href="#thermonuclear">4. Type Ia Supernovae</a>
+<a href="#neutrinos">5. Neutrinos</a>
+<a href="#elements">6. Creation of Elements</a>
+<a href="#remnants">7. Supernova Remnants</a>
+<a href="#neutron">8. Neutron Stars</a>
+<a href="#blackholes">9. Black Holes</a>
+<a href="#energy">10. The Energy of a Supernova</a>
+<a href="#light">11. Why Supernovae Shine</a>
+<a href="#distance">12. Measuring Cosmic Distances</a>
+<a href="#famous">13. Famous Supernovae</a>
+<a href="#galaxy">14. Supernovae and Galaxies</a>
+<a href="#questions">15. Open Questions</a>
+<a href="#summary">16. Summary</a>
+</div>
+
+</div>
+
+
+<section id="what">
+
+<h2>1. What Is a Supernova?</h2>
+
+<p>
+A <strong>supernova</strong> is an extremely powerful stellar explosion.
+It can occur when a massive star reaches the end of its life or when a
+white dwarf undergoes a thermonuclear explosion.
+</p>
+
+<p>
+For a short period, a supernova can become extraordinarily bright.
+The explosion releases enormous amounts of energy and sends material
+outward at thousands of kilometres per second.
+</p>
+
+<p>
+Supernovae are important far beyond their spectacular appearance.
+They influence the evolution of galaxies, enrich interstellar space
+with heavy elements, and can leave behind neutron stars or black holes.
+</p>
+
+<div class="highlight">
+<strong>Key idea:</strong>
+A supernova is not simply a star "getting bigger." It is a catastrophic
+physical event that radically changes the star and its surrounding environment.
+</div>
+
+</section>
+
+
+<section id="types">
+
+<h2>2. Types of Supernovae</h2>
+
+<p>
+Astronomers classify supernovae primarily according to the properties
+of their light spectra and the physical mechanism responsible for the explosion.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Type II</h3>
+<p>
+A hydrogen-rich core-collapse supernova. It usually comes from a massive
+star that has exhausted the nuclear fuel in its core.
+</p>
+</div>
+
+<div class="card">
+<h3>Type Ib</h3>
+<p>
+A core-collapse event from a massive star that has lost most or all of
+its hydrogen envelope.
+</p>
+</div>
+
+<div class="card">
+<h3>Type Ic</h3>
+<p>
+A core-collapse supernova from a star that has lost both its hydrogen
+and much of its helium outer layers.
+</p>
+</div>
+
+<div class="card">
+<h3>Type Ia</h3>
+<p>
+A thermonuclear explosion involving a white dwarf. These events are
+especially important in cosmology.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="collapse">
+
+<h2>3. Core-Collapse Supernovae</h2>
+
+<p>
+Massive stars can spend millions of years converting lighter elements
+into heavier ones through nuclear fusion.
+</p>
+
+<p>
+Eventually, the star can develop an iron-rich core. Iron is different
+from lighter fusion fuels because fusing iron does not provide the
+energy needed to support the star against gravity.
+</p>
+
+<p>
+When the core can no longer support itself, gravity causes a rapid collapse.
+The collapse produces an enormous burst of neutrinos and launches a shock
+that can ultimately drive the outer layers of the star into space.
+</p>
+
+<div class="formula">
+Gravity → Core Collapse → Neutrinos + Shock → Supernova
+</div>
+
+<p>
+The exact physics of the explosion is extremely complex, and researchers
+continue to investigate how the collapsing core transfers enough energy
+to the outer layers.
+</p>
+
+</section>
+
+
+<section id="thermonuclear">
+
+<h2>4. Type Ia Supernovae</h2>
+
+<p>
+Type Ia supernovae are fundamentally different from ordinary core-collapse
+events. They involve a <strong>white dwarf</strong>, the compact remnant
+of a star roughly comparable in size to Earth.
+</p>
+
+<p>
+In some binary-star systems, a white dwarf can gain material from a companion
+star. Under certain conditions, this can lead to runaway thermonuclear burning.
+</p>
+
+<p>
+Another possible pathway involves the merger of two white dwarfs.
+The detailed pathways producing Type Ia explosions are still an active
+area of research.
+</p>
+
+<div class="highlight">
+<strong>Why Type Ia matters:</strong>
+Their relatively predictable intrinsic brightness makes them useful as
+astronomical distance indicators.
+</div>
+
+</section>
+
+
+<section id="neutrinos">
+
+<h2>5. Neutrinos</h2>
+
+<p>
+One of the most remarkable products of a core-collapse supernova is a huge
+burst of <strong>neutrinos</strong>.
+</p>
+
+<p>
+Neutrinos are electrically neutral elementary particles that interact
+only very weakly with matter. Because of this, enormous numbers of them
+can escape from the collapsing stellar core.
+</p>
+
+<p>
+Detecting neutrinos from a nearby supernova would allow scientists to
+study processes occurring deep inside the explosion.
+</p>
+
+</section>
+
+
+<section id="elements">
+
+<h2>6. Creation of Elements</h2>
+
+<p>
+Supernovae play a major role in the cosmic recycling of matter.
+Stars manufacture many elements during their lives, while explosive
+environments can create additional nuclei through rapid nuclear processes.
+</p>
+
+<p>
+The explosion then disperses newly synthesized material into surrounding
+interstellar space.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Oxygen</h3>
+<p>
+Produced in large quantities during the evolution of massive stars and
+released into space by stellar processes and explosions.
+</p>
+</div>
+
+<div class="card">
+<h3>Silicon</h3>
+<p>
+Important in advanced stages of massive-star evolution and explosive
+nucleosynthesis.
+</p>
+</div>
+
+<div class="card">
+<h3>Iron-peak Elements</h3>
+<p>
+Elements near iron in the periodic table are strongly connected with
+stellar nuclear burning and explosive processes.
+</p>
+</div>
+
+<div class="card">
+<h3>Heavy Elements</h3>
+<p>
+Some heavy nuclei can form through neutron-capture processes associated
+with extreme astrophysical environments.
+</p>
+</div>
+
+</div>
+
+<p>
+The exact origin of every heavy element is not explained by supernovae alone.
+For some elements, neutron-star mergers and other events are also important.
+</p>
+
+</section>
+
+
+<section id="remnants">
+
+<h2>7. Supernova Remnants</h2>
+
+<p>
+The explosion does not simply disappear after the bright phase ends.
+The expanding material can form a huge structure called a
+<strong>supernova remnant</strong>.
+</p>
+
+<p>
+These remnants can contain shock waves, hot plasma, magnetic fields,
+cosmic rays and enriched material from the original star.
+</p>
+
+<div class="highlight">
+A supernova remnant can remain observable long after the original
+star has been destroyed.
+</div>
+
+</section>
+
+
+<section id="neutron">
+
+<h2>8. Neutron Stars</h2>
+
+<p>
+If the core of a massive star collapses but does not become a black hole,
+it can form an extraordinarily dense object called a
+<strong>neutron star</strong>.
+</p>
+
+<p>
+A neutron star packs roughly stellar mass into a sphere only tens of
+kilometres across.
+</p>
+
+<p>
+Matter under these conditions reaches densities far beyond anything
+normally encountered on Earth.
+</p>
+
+<h3>Pulsars</h3>
+
+<p>
+Some neutron stars rotate rapidly and emit beams of electromagnetic
+radiation. If the beam sweeps across Earth during rotation, astronomers
+can observe regular pulses. Such objects are called
+<strong>pulsars</strong>.
+</p>
+
+</section>
+
+
+<section id="blackholes">
+
+<h2>9. Black Holes</h2>
+
+<p>
+For sufficiently massive stellar cores, gravity can overwhelm the forces
+supporting the collapsing matter.
+</p>
+
+<p>
+The collapse can produce a <strong>stellar-mass black hole</strong>.
+The boundary around a black hole from which light cannot escape is called
+the event horizon.
+</p>
+
+<div class="formula">
+r<sub>s</sub> = 2GM / c²
+</div>
+
+<p>
+This equation gives the Schwarzschild radius for a non-rotating black hole,
+where <em>G</em> is the gravitational constant, <em>M</em> is mass and
+<em>c</em> is the speed of light.
+</p>
+
+</section>
+
+
+<section id="energy">
+
+<h2>10. The Energy of a Supernova</h2>
+
+<p>
+Supernovae involve enormous energy scales.
+Much of the energy in a core-collapse event is carried away by neutrinos,
+while a smaller fraction appears in electromagnetic radiation and the
+kinetic energy of the expanding ejecta.
+</p>
+
+<p>
+The famous relationship between mass and energy is:
+</p>
+
+<div class="formula">
+E = mc²
+</div>
+
+<p>
+Because the speed of light squared is an enormous number, even a small
+amount of mass corresponds to a very large amount of energy.
+</p>
+
+</section>
+
+
+<section id="light">
+
+<h2>11. Why Supernovae Shine</h2>
+
+<p>
+The visible brightness of a supernova changes with time.
+After the initial explosion, radioactive isotopes created during the
+event can contribute to the heating of the expanding ejecta.
+</p>
+
+<p>
+The resulting light curve contains valuable information about the
+explosion, its composition and the surrounding environment.
+</p>
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>Observation</th>
+<th>What It Can Tell Astronomers</th>
+</tr>
+
+<tr>
+<td>Brightness</td>
+<td>Information about luminosity and distance</td>
+</tr>
+
+<tr>
+<td>Spectrum</td>
+<td>Elements and physical conditions</td>
+</tr>
+
+<tr>
+<td>Light curve</td>
+<td>How the explosion evolves with time</td>
+</tr>
+
+<tr>
+<td>Expansion speed</td>
+<td>Properties of the ejecta</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+<section id="distance">
+
+<h2>12. Measuring Cosmic Distances</h2>
+
+<p>
+Some Type Ia supernovae can be used as <strong>standardizable candles</strong>.
+Astronomers compare their observed brightness with the expected intrinsic
+brightness to estimate distance.
+</p>
+
+<p>
+These measurements became particularly important in studies of the
+expansion history of the universe.
+</p>
+
+<p>
+Observations of distant Type Ia supernovae contributed to the discovery
+that cosmic expansion is accelerating, a phenomenon commonly associated
+with <strong>dark energy</strong>.
+</p>
+
+</section>
+
+
+<section id="famous">
+
+<h2>13. Famous Supernovae</h2>
+
+<h3>SN 1987A</h3>
+
+<p>
+SN 1987A exploded in the Large Magellanic Cloud and became one of the
+most intensively studied supernovae of the modern astronomical era.
+Its relative proximity allowed scientists to observe the event in
+extraordinary detail.
+</p>
+
+<h3>Kepler's Supernova</h3>
+
+<p>
+A supernova observed in 1604 was visible from Earth and was studied by
+astronomers including Johannes Kepler. It is now known as
+Kepler's Supernova.
+</p>
+
+<h3>Tycho's Supernova</h3>
+
+<p>
+A bright stellar explosion observed in 1572 was extensively documented
+by Tycho Brahe and other observers.
+</p>
+
+</section>
+
+
+<section id="galaxy">
+
+<h2>14. Supernovae and Galaxies</h2>
+
+<p>
+Supernovae are part of the life cycle of matter in galaxies.
+Their explosions inject energy and material into the interstellar medium.
+</p>
+
+<p>
+The resulting shock waves can influence surrounding gas and, under some
+conditions, affect the formation of new stars.
+</p>
+
+<p>
+This means that stellar death can contribute to future stellar birth.
+The universe continuously recycles material between stars, gas clouds
+and planetary systems.
+</p>
+
+<div class="highlight">
+<strong>Cosmic recycling:</strong>
+The atoms released by ancient stars can eventually become part of new
+stars, planets and other objects.
+</div>
+
+</section>
+
+
+<section id="questions">
+
+<h2>15. Open Questions</h2>
+
+<p>
+Although supernovae have been studied for centuries, many questions remain.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Explosion Mechanism</h3>
+<p>
+How exactly does the collapsing core transfer enough energy to launch
+a successful explosion?
+</p>
+</div>
+
+<div class="card">
+<h3>Neutrino Physics</h3>
+<p>
+How do neutrinos interact with the collapsing stellar environment and
+help influence the explosion?
+</p>
+</div>
+
+<div class="card">
+<h3>Heavy Elements</h3>
+<p>
+Which astrophysical events are responsible for producing particular
+heavy elements?
+</p>
+</div>
+
+<div class="card">
+<h3>Binary Systems</h3>
+<p>
+What combinations of binary-star evolution produce the different
+types of thermonuclear supernovae?
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="summary">
+
+<h2>16. Summary</h2>
+
+<p>
+Supernovae are among the most energetic and scientifically important
+events in the universe.
+</p>
+
+<p>
+They mark the explosive deaths of some stars, create and distribute
+chemical elements, generate powerful shock waves and can leave behind
+neutron stars or black holes.
+</p>
+
+<p>
+They also provide astronomers with valuable tools for studying the
+large-scale universe.
+</p>
+
+<div class="highlight">
+
+<strong>The big picture:</strong>
+
+A supernova is simultaneously the end of a star's life and a mechanism
+that helps shape the future evolution of the cosmos.
+
+</div>
+
+</section>
+
+
+<section>
+
+<h2>Scientific References</h2>
+
+<p>
+For further study, useful sources include NASA, ESA, the European Southern
+Observatory (ESO), the National Science Foundation and peer-reviewed
+astrophysics literature.
+</p>
+
+</section>
+
+</main>
+
+<footer>
+
+COSMIC ARCHIVE · SUPERNOVAE<br>
+Exploring stars, galaxies, black holes and the physics of the universe.
+
+</footer>
+
+</body>
+</html>

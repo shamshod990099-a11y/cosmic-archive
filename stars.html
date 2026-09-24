@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stars | Astrophysics Explorer</title>
+
+<meta name="description" content="A detailed scientific guide to stars, stellar formation, nuclear fusion, evolution, white dwarfs, neutron stars and stellar remnants.">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 15% 10%,#172554 0,transparent 35%),
+        radial-gradient(circle at 85% 25%,#3b0764 0,transparent 30%),
+        #020617;
+    color:#f8fafc;
+    line-height:1.8;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 7%;
+
+    background:rgba(2,6,23,.94);
+    border-bottom:1px solid #1e293b;
+    backdrop-filter:blur(12px);
+}
+
+.logo{
+    color:#60a5fa;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+nav a{
+    color:#cbd5e1;
+    text-decoration:none;
+    margin-left:22px;
+}
+
+nav a:hover{
+    color:#60a5fa;
+}
+
+.hero{
+    text-align:center;
+    padding:90px 20px 70px;
+}
+
+.star-icon{
+    font-size:75px;
+}
+
+.hero h1{
+    font-size:clamp(45px,8vw,80px);
+    margin:10px 0 20px;
+
+    background:linear-gradient(
+        90deg,
+        #38bdf8,
+        #818cf8,
+        #c084fc
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:850px;
+    margin:auto;
+    color:#94a3b8;
+    font-size:20px;
+}
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+article{
+    background:rgba(15,23,42,.88);
+    border:1px solid #1e293b;
+    border-radius:24px;
+    padding:45px;
+    box-shadow:0 20px 80px rgba(0,0,0,.35);
+}
+
+.contents{
+    background:#020617;
+    border:1px solid #1e293b;
+    border-radius:16px;
+    padding:25px;
+    margin-bottom:40px;
+}
+
+.contents h2{
+    color:#60a5fa;
+    margin-bottom:12px;
+}
+
+.contents a{
+    display:block;
+    color:#94a3b8;
+    text-decoration:none;
+    padding:4px 0;
+}
+
+.contents a:hover{
+    color:#60a5fa;
+}
+
+article h2{
+    color:#60a5fa;
+    font-size:32px;
+    margin-top:55px;
+    margin-bottom:15px;
+    padding-bottom:8px;
+    border-bottom:1px solid #1e293b;
+}
+
+article h2:first-of-type{
+    margin-top:0;
+}
+
+article h3{
+    color:#c084fc;
+    font-size:23px;
+    margin-top:28px;
+    margin-bottom:10px;
+}
+
+article p{
+    color:#cbd5e1;
+    margin-bottom:17px;
+}
+
+article ul{
+    color:#cbd5e1;
+    margin:10px 0 20px 25px;
+}
+
+article li{
+    margin-bottom:7px;
+}
+
+.info{
+    background:#020617;
+    border-left:4px solid #38bdf8;
+    padding:20px;
+    margin:25px 0;
+    border-radius:8px;
+}
+
+.info strong{
+    color:#38bdf8;
+}
+
+.fact{
+    background:linear-gradient(
+        135deg,
+        rgba(37,99,235,.15),
+        rgba(124,58,237,.15)
+    );
+
+    border:1px solid #334155;
+    border-radius:15px;
+    padding:24px;
+    margin:30px 0;
+}
+
+.fact strong{
+    color:#38bdf8;
+}
+
+.formula{
+    text-align:center;
+    background:#020617;
+    border:1px solid #1e3a8a;
+    border-radius:12px;
+    padding:20px;
+    margin:25px 0;
+
+    color:#93c5fd;
+    font-family:monospace;
+    font-size:22px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:25px 0;
+}
+
+th,td{
+    border:1px solid #334155;
+    padding:13px;
+    text-align:left;
+}
+
+th{
+    background:#172554;
+    color:#93c5fd;
+}
+
+td{
+    color:#cbd5e1;
+}
+
+.references{
+    margin-top:50px;
+    padding:25px;
+    background:#020617;
+    border:1px solid #1e293b;
+    border-radius:15px;
+}
+
+.references p,
+.references li{
+    color:#94a3b8;
+}
+
+.back{
+    display:inline-block;
+    margin-top:30px;
+    padding:12px 22px;
+    border-radius:25px;
+    background:#1e293b;
+    color:white;
+    text-decoration:none;
+}
+
+.back:hover{
+    background:#334155;
+}
+
+footer{
+    text-align:center;
+    margin-top:60px;
+    padding:45px 20px;
+    border-top:1px solid #1e293b;
+    color:#64748b;
+}
+
+@media(max-width:700px){
+
+    nav{
+        padding:15px 5%;
+    }
+
+    nav div:last-child{
+        display:none;
+    }
+
+    article{
+        padding:25px;
+    }
+
+    article h2{
+        font-size:27px;
+    }
+
+    table{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">ASTROPHYSICS EXPLORER</div>
+
+    <div>
+        <a href="index.html">Home</a>
+        <a href="black-holes.html">Black Holes</a>
+        <a href="galaxies.html">Galaxies</a>
+    </div>
+</nav>
+
+<header class="hero">
+
+    <div class="star-icon">⭐</div>
+
+    <h1>Stars</h1>
+
+    <p>
+        A scientific journey through the birth, physics, evolution
+        and final fate of stars.
+    </p>
+
+</header>
+
+<main class="container">
+
+<article>
+
+<div class="contents">
+
+<h2>📚 Contents</h2>
+
+<a href="#what">1. What Is a Star?</a>
+<a href="#birth">2. How Stars Are Born</a>
+<a href="#protostar">3. Protostars</a>
+<a href="#fusion">4. Nuclear Fusion</a>
+<a href="#main">5. Main Sequence</a>
+<a href="#mass">6. Why Mass Matters</a>
+<a href="#temperature">7. Temperature and Color</a>
+<a href="#spectra">8. Stellar Spectra</a>
+<a href="#evolution">9. Stellar Evolution</a>
+<a href="#giant">10. Red Giants</a>
+<a href="#white">11. White Dwarfs</a>
+<a href="#massive">12. Massive Stars</a>
+<a href="#supernova">13. Supernovae</a>
+<a href="#neutron">14. Neutron Stars</a>
+<a href="#pulsar">15. Pulsars</a>
+<a href="#magnetar">16. Magnetars</a>
+<a href="#elements">17. Stellar Nucleosynthesis</a>
+<a href="#classification">18. Stellar Classification</a>
+<a href="#study">19. How Astronomers Study Stars</a>
+<a href="#questions">20. Open Questions</a>
+<a href="#summary">21. Summary</a>
+
+</div>
+
+
+<h2 id="what">1. What Is a Star?</h2>
+
+<p>
+A star is a huge astronomical object consisting mainly of extremely
+hot plasma. Its enormous mass produces gravity, while the hot interior
+creates pressure that acts against gravitational compression.
+</p>
+
+<p>
+Most of the energy emitted by a normal star ultimately comes from
+nuclear reactions occurring deep inside it. Stars are therefore
+enormous natural laboratories for nuclear physics, plasma physics,
+gravity and thermodynamics.
+</p>
+
+<div class="info">
+<strong>Key concept:</strong>
+A stable star is approximately in hydrostatic equilibrium:
+gravity pulls inward while pressure pushes outward.
+</div>
+
+
+<h2 id="birth">2. How Stars Are Born</h2>
+
+<p>
+Stars begin inside cold molecular clouds containing mostly hydrogen
+and helium, together with dust and small quantities of heavier elements.
+</p>
+
+<p>
+A region of a cloud can become gravitationally unstable. Gravity then
+causes the material to collapse toward its center.
+</p>
+
+<p>
+As the cloud contracts, gravitational potential energy is converted
+into thermal energy. Density and temperature increase as the collapse
+continues.
+</p>
+
+<h3>Star-forming regions</h3>
+
+<p>
+Many stars are born in groups or clusters because large molecular
+clouds can fragment into many collapsing regions at once.
+</p>
+
+
+<h2 id="protostar">3. Protostars</h2>
+
+<p>
+A protostar is a young object that is still contracting and gathering
+material before becoming a stable main-sequence star.
+</p>
+
+<p>
+Protostars can be surrounded by rotating disks of gas and dust.
+These disks are important because planets can eventually form from
+the material within them.
+</p>
+
+<div class="fact">
+<strong>Interesting connection:</strong>
+The formation of stars and the formation of planetary systems are
+closely connected processes.
+</div>
+
+
+<h2 id="fusion">4. Nuclear Fusion</h2>
+
+<p>
+Once the central temperature and density become sufficiently high,
+hydrogen nuclei can undergo nuclear fusion.
+</p>
+
+<p>
+In stars similar to the Sun, the dominant process is the
+proton-proton chain.
+</p>
+
+<div class="formula">
+4H → He + energy
+</div>
+
+<p>
+The total mass of the final products is slightly smaller than the
+initial mass. The difference is converted into energy.
+</p>
+
+<div class="formula">
+E = mc²
+</div>
+
+<p>
+This mass-energy relationship explains why a relatively small amount
+of mass can correspond to an enormous quantity of energy.
+</p>
+
+
+<h2 id="main">5. The Main Sequence</h2>
+
+<p>
+The main sequence is the longest major stage in the life of most stars.
+During this period, hydrogen fusion occurs in the core.
+</p>
+
+<p>
+The exact properties of a main-sequence star depend strongly on
+its mass.
+</p>
+
+<table>
+
+<tr>
+<th>Property</th>
+<th>Lower Mass</th>
+<th>Higher Mass</th>
+</tr>
+
+<tr>
+<td>Surface temperature</td>
+<td>Generally lower</td>
+<td>Generally higher</td>
+</tr>
+
+<tr>
+<td>Luminosity</td>
+<td>Lower</td>
+<td>Much higher</td>
+</tr>
+
+<tr>
+<td>Fuel consumption</td>
+<td>Slower</td>
+<td>Faster</td>
+</tr>
+
+<tr>
+<td>Lifetime</td>
+<td>Generally longer</td>
+<td>Generally shorter</td>
+</tr>
+
+</table>
+
+
+<h2 id="mass">6. Why Stellar Mass Matters</h2>
+
+<p>
+Mass is one of the most important factors determining a star's
+temperature, luminosity, internal structure and lifetime.
+</p>
+
+<p>
+Massive stars have stronger gravitational compression in their cores.
+This allows higher temperatures and faster nuclear reaction rates.
+</p>
+
+<p>
+As a result, massive stars can be enormously luminous while consuming
+their nuclear fuel much faster than low-mass stars.
+</p>
+
+
+<h2 id="temperature">7. Temperature and Color</h2>
+
+<p>
+A star's surface temperature affects the distribution of wavelengths
+in the light it emits.
+</p>
+
+<p>
+Very hot stars tend to appear blue or blue-white, while cooler stars
+tend toward orange or red.
+</p>
+
+<table>
+
+<tr>
+<th>Color</th>
+<th>Typical spectral classes</th>
+<th>Temperature</th>
+</tr>
+
+<tr>
+<td>Blue</td>
+<td>O, B</td>
+<td>Very hot</td>
+</tr>
+
+<tr>
+<td>White</td>
+<td>A</td>
+<td>Hot</td>
+</tr>
+
+<tr>
+<td>Yellow</td>
+<td>G</td>
+<td>Intermediate</td>
+</tr>
+
+<tr>
+<td>Orange</td>
+<td>K</td>
+<td>Cooler</td>
+</tr>
+
+<tr>
+<td>Red</td>
+<td>M</td>
+<td>Cool</td>
+</tr>
+
+</table>
+
+<p>
+The Sun is classified as a G-type main-sequence star.
+</p>
+
+
+<h2 id="spectra">8. Stellar Spectra</h2>
+
+<p>
+Astronomers can learn an extraordinary amount about a star by
+splitting its light into a spectrum.
+</p>
+
+<p>
+Atoms and ions absorb and emit particular wavelengths.
+These patterns produce spectral lines that can reveal the chemical
+composition of a star's atmosphere.
+</p>
+
+<h3>What can spectroscopy reveal?</h3>
+
+<ul>
+<li>Chemical composition</li>
+<li>Temperature</li>
+<li>Density</li>
+<li>Motion toward or away from Earth</li>
+<li>Magnetic effects</li>
+<li>Physical conditions in the atmosphere</li>
+</ul>
+
+
+<h2 id="evolution">9. Stellar Evolution</h2>
+
+<p>
+Stars are not static. Their internal structure changes as nuclear fuel
+is consumed and new nuclear reactions begin.
+</p>
+
+<p>
+A simplified stellar pathway is:
+</p>
+
+<div class="formula">
+Molecular Cloud → Protostar → Main Sequence → Stellar Remnant
+</div>
+
+<p>
+The final pathway depends strongly on the star's initial mass.
+</p>
+
+
+<h2 id="giant">10. Red Giants</h2>
+
+<p>
+When a Sun-like star exhausts the hydrogen in its core,
+hydrogen fusion can continue in a shell around the core.
+</p>
+
+<p>
+The outer layers can expand enormously. As they expand, the surface
+cools and the star becomes redder.
+</p>
+
+<p>
+During later stages, helium fusion can occur in sufficiently suitable
+stellar cores, producing heavier nuclei such as carbon and oxygen.
+</p>
+
+
+<h2 id="white">11. White Dwarfs</h2>
+
+<p>
+Many low- and intermediate-mass stars eventually lose their outer
+layers and leave behind a compact stellar core called a white dwarf.
+</p>
+
+<p>
+White dwarfs are supported primarily by electron degeneracy pressure.
+They no longer generate their energy through ordinary sustained
+hydrogen fusion.
+</p>
+
+<h3>Chandrasekhar limit</h3>
+
+<p>
+There is an approximate upper mass limit for a stable,
+non-rotating white dwarf supported by electron degeneracy pressure.
+It is around 1.4 times the mass of the Sun.
+</p>
+
+<div class="formula">
+M ≈ 1.4 M☉
+</div>
+
+
+<h2 id="massive">12. Massive Stars</h2>
+
+<p>
+Massive stars evolve much faster than stars like the Sun.
+Their cores can reach temperatures high enough for multiple stages
+of nuclear burning.
+</p>
+
+<p>
+They can form progressively heavier elements in their interiors.
+Eventually an iron-rich core can develop.
+</p>
+
+<p>
+Ordinary fusion of nuclei heavier than iron does not provide the same
+net energy benefit as the fusion reactions that power ordinary stars.
+</p>
+
+
+<h2 id="supernova">13. Supernovae</h2>
+
+<p>
+When a sufficiently massive stellar core can no longer support itself
+against gravity, it can collapse extremely rapidly.
+</p>
+
+<p>
+This core-collapse process can produce a supernova explosion,
+ejecting material into surrounding space.
+</p>
+
+<p>
+The explosion can dramatically alter the surrounding interstellar
+medium and distribute newly synthesized elements.
+</p>
+
+<div class="fact">
+<strong>Cosmic recycling:</strong>
+Material released by previous generations of stars can later become
+part of new stars, planets and other astronomical objects.
+</div>
+
+
+<h2 id="neutron">14. Neutron Stars</h2>
+
+<p>
+A neutron star can form from the collapsed core of a massive star.
+It contains an enormous amount of mass compressed into a sphere
+only tens of kilometers across.
+</p>
+
+<p>
+The matter inside neutron stars exists under conditions of extreme
+density and pressure that cannot be reproduced naturally on Earth.
+</p>
+
+
+<h2 id="pulsar">15. Pulsars</h2>
+
+<p>
+A pulsar is a rotating neutron star whose radiation can be observed
+as extremely regular pulses when its emission beam crosses our line
+of sight.
+</p>
+
+<p>
+Some pulsars rotate many times per second.
+Their remarkable regularity makes them useful for studying gravity,
+stellar physics and the interstellar medium.
+</p>
+
+
+<h2 id="magnetar">16. Magnetars</h2>
+
+<p>
+Magnetars are neutron stars associated with extraordinarily powerful
+magnetic fields.
+</p>
+
+<p>
+Their magnetic activity can produce intense bursts of high-energy
+radiation, making them some of the most extreme objects known.
+</p>
+
+
+<div class="fact">
+<strong>Extreme physics:</strong>
+Neutron stars and magnetars allow scientists to investigate matter
+under conditions far beyond ordinary terrestrial environments.
+</div>
+
+
+<h2 id="elements">17. Stellar Nucleosynthesis</h2>
+
+<p>
+Nucleosynthesis is the production of atomic nuclei.
+Stars are major sites where many chemical elements are produced.
+</p>
+
+<p>
+The early Universe consisted primarily of hydrogen and helium,
+with small amounts of other light elements.
+Stellar generations subsequently produced many heavier elements.
+</p>
+
+<p>
+Those elements can later become incorporated into planets and living
+systems.
+</p>
+
+
+<h2 id="classification">18. Stellar Classification</h2>
+
+<p>
+Stars are classified using their spectra and physical properties.
+The major spectral sequence is:
+</p>
+
+<div class="formula">
+O B A F G K M
+</div>
+
+<p>
+The sequence primarily reflects surface temperature and corresponding
+spectral characteristics.
+</p>
+
+<h3>Additional classification</h3>
+
+<p>
+Astronomers also distinguish between luminosity classes, helping
+separate main-sequence stars, giants and supergiants.
+</p>
+
+
+<h2 id="study">19. How Astronomers Study Stars</h2>
+
+<p>
+Astronomers cannot normally travel to other stars and collect samples.
+Instead, they extract information from electromagnetic radiation and
+other measurable signals.
+</p>
+
+<ul>
+<li>Optical astronomy</li>
+<li>Infrared astronomy</li>
+<li>Radio astronomy</li>
+<li>Ultraviolet observations</li>
+<li>X-ray astronomy</li>
+<li>Spectroscopy</li>
+<li>Photometry</li>
+<li>Astrometry</li>
+<li>Asteroseismology</li>
+</ul>
+
+<h3>Asteroseismology</h3>
+
+<p>
+Asteroseismology studies oscillations inside stars.
+These vibrations can reveal information about stellar interiors,
+including internal structure and physical conditions.
+</p>
+
+
+<h2 id="questions">20. Open Scientific Questions</h2>
+
+<p>
+Stellar astrophysics is highly developed, but many important questions
+remain active areas of research.
+</p>
+
+<ul>
+<li>How exactly do the most massive stars form?</li>
+<li>How do stellar magnetic fields develop?</li>
+<li>What controls the detailed physics of stellar winds?</li>
+<li>How exactly are the heaviest elements produced?</li>
+<li>How do stellar explosions begin?</li>
+<li>How do stars influence planets around them?</li>
+<li>How does stellar activity affect planetary atmospheres?</li>
+</ul>
+
+
+<h2 id="summary">21. Summary</h2>
+
+<p>
+Stars are fundamental structures of the Universe.
+They form from collapsing clouds of gas and dust, generate energy
+through nuclear processes and evolve according to their mass,
+composition and environment.
+</p>
+
+<p>
+Low- and intermediate-mass stars can ultimately become white dwarfs.
+More massive stars can end in spectacular core-collapse events,
+leaving neutron stars or black holes.
+</p>
+
+<p>
+By studying starlight, spectra, vibrations, magnetic fields and
+stellar explosions, astronomers can reconstruct the life histories
+of stars across the cosmos.
+</p>
+
+<div class="fact">
+<strong>🌌 The big picture:</strong>
+Understanding stars helps us understand galaxies, planetary systems,
+chemical evolution and ultimately the history of the Universe itself.
+</div>
+
+
+<div class="references">
+
+<h2>📚 References & Further Reading</h2>
+
+<ul>
+<li>NASA — Astrophysics and Stars</li>
+<li>ESA — Space Science</li>
+<li>OpenStax Astronomy</li>
+<li>Encyclopaedia Britannica — Stars</li>
+<li>Peer-reviewed astrophysics literature</li>
+</ul>
+
+<p>
+This article is an educational overview. For advanced research,
+consult current peer-reviewed astrophysics publications and
+official observatory or space-agency resources.
+</p>
+
+</div>
+
+<a class="back" href="index.html">
+← Back to Astrophysics Explorer
+</a>
+
+</article>
+
+</main>
+
+<footer>
+
+<p>ASTROPHYSICS EXPLORER</p>
+<p>Explore • Question • Understand the Universe</p>
+<p>© 2026</p>
+
+</footer>
+
+</body>
+</html>

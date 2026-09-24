@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Exoplanets | Cosmic Archive</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:#eaf2ff;
+    line-height:1.75;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(40,170,210,.18),transparent 30%),
+        radial-gradient(circle at 85% 25%,rgba(100,70,210,.22),transparent 30%),
+        radial-gradient(circle at 50% 90%,rgba(30,120,180,.16),transparent 35%),
+        #050812;
+}
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+a{
+    color:inherit;
+}
+
+/* NAV */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(14px);
+    background:rgba(5,8,18,.84);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav-inner{
+    width:min(1100px,92%);
+    margin:auto;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#52d7ff;
+}
+
+.back{
+    text-decoration:none;
+    padding:9px 16px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:999px;
+    transition:.25s;
+}
+
+.back:hover{
+    background:rgba(255,255,255,.1);
+}
+
+/* HERO */
+
+.hero{
+    min-height:520px;
+    display:flex;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:480px;
+    height:480px;
+    border-radius:50%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:
+        radial-gradient(circle,
+        rgba(120,220,255,.8) 0%,
+        rgba(50,130,255,.35) 25%,
+        rgba(90,50,190,.18) 45%,
+        transparent 72%);
+    filter:blur(12px);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:100%;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 15px;
+    border-radius:999px;
+    border:1px solid rgba(80,210,255,.3);
+    background:rgba(50,180,255,.07);
+    color:#8fe6ff;
+    font-size:13px;
+    letter-spacing:1px;
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:clamp(44px,8vw,86px);
+    line-height:1;
+    margin-bottom:22px;
+    background:linear-gradient(90deg,#fff,#a8edff,#62caff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:780px;
+    margin:auto;
+    color:#b9c5da;
+    font-size:18px;
+}
+
+/* CONTENT */
+
+main{
+    padding-bottom:80px;
+}
+
+.toc{
+    margin:35px 0 60px;
+    padding:25px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:18px;
+}
+
+.toc h2{
+    margin-bottom:15px;
+    color:#fff;
+}
+
+.toc-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:8px 25px;
+}
+
+.toc a{
+    color:#aebbd2;
+    text-decoration:none;
+}
+
+.toc a:hover{
+    color:#67dcff;
+}
+
+section{
+    margin-bottom:65px;
+    scroll-margin-top:85px;
+}
+
+section h2{
+    font-size:32px;
+    margin-bottom:18px;
+    color:#fff;
+}
+
+section h3{
+    font-size:22px;
+    margin:28px 0 10px;
+    color:#bceeff;
+}
+
+section p{
+    color:#b8c4d8;
+    margin-bottom:15px;
+}
+
+strong{
+    color:#fff;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+    margin:25px 0;
+}
+
+.card{
+    padding:23px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:17px;
+}
+
+.card h3{
+    margin:0 0 8px;
+    color:#fff;
+}
+
+.card p{
+    margin:0;
+    font-size:15px;
+}
+
+/* FORMULA */
+
+.formula{
+    margin:25px 0;
+    padding:22px;
+    text-align:center;
+    font-family:Georgia,serif;
+    font-size:25px;
+    color:#c9f3ff;
+    background:rgba(60,190,255,.06);
+    border-left:4px solid #55d8ff;
+    border-radius:10px;
+    overflow-x:auto;
+}
+
+/* TABLE */
+
+.table-wrap{
+    overflow-x:auto;
+    margin:25px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+    background:rgba(255,255,255,.035);
+}
+
+th,td{
+    padding:14px;
+    text-align:left;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+th{
+    color:#bdeeff;
+    background:rgba(50,190,255,.08);
+}
+
+td{
+    color:#b9c5d8;
+}
+
+/* HIGHLIGHT */
+
+.highlight{
+    margin:25px 0;
+    padding:24px;
+    border-radius:16px;
+    background:linear-gradient(
+        135deg,
+        rgba(40,190,255,.10),
+        rgba(100,70,200,.08)
+    );
+    border:1px solid rgba(80,210,255,.15);
+}
+
+.highlight strong{
+    color:#7ee2ff;
+}
+
+/* FOOTER */
+
+footer{
+    padding:35px 0;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#78859c;
+    font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .nav-inner{
+        height:58px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .back{
+        font-size:13px;
+        padding:7px 12px;
+    }
+
+    .hero{
+        min-height:450px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    section h2{
+        font-size:27px;
+    }
+
+    .formula{
+        font-size:21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-inner">
+
+        <div class="logo">
+            COSMIC<span>ARCHIVE</span>
+        </div>
+
+        <a href="index.html" class="back">
+            ← Back to Universe
+        </a>
+
+    </div>
+</nav>
+
+
+<header class="hero">
+
+    <div class="hero-content container">
+
+        <div class="badge">
+            WORLDS BEYOND OUR SOLAR SYSTEM
+        </div>
+
+        <h1>EXOPLANETS</h1>
+
+        <p>
+            Thousands of worlds have been discovered beyond our Solar System,
+            revealing an enormous diversity of planets throughout the galaxy.
+        </p>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<div class="toc">
+
+<h2>Contents</h2>
+
+<div class="toc-grid">
+
+<a href="#what">1. What Is an Exoplanet?</a>
+<a href="#discovery">2. How Are Exoplanets Discovered?</a>
+<a href="#transit">3. The Transit Method</a>
+<a href="#radial">4. Radial Velocity</a>
+<a href="#imaging">5. Direct Imaging</a>
+<a href="#microlensing">6. Gravitational Microlensing</a>
+<a href="#types">7. Types of Exoplanets</a>
+<a href="#hotjupiter">8. Hot Jupiters</a>
+<a href="#superearth">9. Super-Earths</a>
+<a href="#neptune">10. Mini-Neptunes</a>
+<a href="#habitable">11. Habitable Zone</a>
+<a href="#atmospheres">12. Exoplanet Atmospheres</a>
+<a href="#biosignatures">13. Biosignatures</a>
+<a href="#earth">14. Earth-Like Worlds</a>
+<a href="#systems">15. Planetary Systems</a>
+<a href="#future">16. Future Exploration</a>
+<a href="#questions">17. Open Questions</a>
+<a href="#summary">18. Summary</a>
+
+</div>
+
+</div>
+
+
+<section id="what">
+
+<h2>1. What Is an Exoplanet?</h2>
+
+<p>
+An <strong>exoplanet</strong>, or extrasolar planet, is a planet that
+orbits a star outside our Solar System.
+</p>
+
+<p>
+The first confirmed discoveries of exoplanets around ordinary
+Sun-like stars opened a completely new field of astronomy.
+</p>
+
+<p>
+Today, astronomers know that planets are common in the galaxy and that
+planetary systems can be remarkably different from our own.
+</p>
+
+<div class="highlight">
+
+<strong>Important:</strong>
+An exoplanet does not have to resemble Earth. Some are enormous gas
+giants, some may be rocky worlds, and others orbit their stars at
+extremely close distances.
+
+</div>
+
+</section>
+
+
+<section id="discovery">
+
+<h2>2. How Are Exoplanets Discovered?</h2>
+
+<p>
+Exoplanets are usually difficult to see directly because their host
+stars are enormously brighter than the planets themselves.
+</p>
+
+<p>
+Instead, astronomers often detect the subtle effects that planets
+produce on their stars or on light passing through a planetary system.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Transit</h3>
+<p>
+Detects a tiny decrease in a star's brightness when a planet crosses
+in front of it.
+</p>
+</div>
+
+<div class="card">
+<h3>Radial Velocity</h3>
+<p>
+Measures the small motion of a star caused by the gravitational pull
+of an orbiting planet.
+</p>
+</div>
+
+<div class="card">
+<h3>Direct Imaging</h3>
+<p>
+Attempts to detect light coming directly from the planet after
+suppressing the overwhelming brightness of its star.
+</p>
+</div>
+
+<div class="card">
+<h3>Microlensing</h3>
+<p>
+Uses gravitational lensing to detect planets that temporarily alter
+the brightness of a background star.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="transit">
+
+<h2>3. The Transit Method</h2>
+
+<p>
+The transit method is one of the most successful techniques for
+discovering exoplanets.
+</p>
+
+<p>
+If a planet passes between Earth and its star, it blocks a small
+fraction of the star's light.
+</p>
+
+<p>
+Astronomers measure this repeated decrease in brightness and study
+its shape and timing.
+</p>
+
+<div class="formula">
+Transit Depth ≈ (R<sub>p</sub> / R<sub>*</sub>)²
+</div>
+
+<p>
+Here, R<sub>p</sub> is the planet's radius and R<sub>*</sub> is the
+radius of its host star.
+</p>
+
+<p>
+This means that larger planets generally produce deeper transits.
+</p>
+
+</section>
+
+
+<section id="radial">
+
+<h2>4. Radial Velocity</h2>
+
+<p>
+A planet does not simply orbit a completely stationary star.
+Both objects orbit their shared centre of mass.
+</p>
+
+<p>
+As a result, the star moves slightly toward and away from Earth.
+Astronomers can detect this motion through changes in the star's
+spectral lines.
+</p>
+
+<div class="highlight">
+
+<strong>Doppler effect:</strong>
+Motion toward the observer shifts spectral lines toward shorter
+wavelengths, while motion away shifts them toward longer wavelengths.
+
+</div>
+
+</section>
+
+
+<section id="imaging">
+
+<h2>5. Direct Imaging</h2>
+
+<p>
+Directly photographing an exoplanet is extremely difficult because
+the planet can be millions or billions of times fainter than its star
+at visible wavelengths.
+</p>
+
+<p>
+Astronomers therefore use advanced instruments and techniques such as
+coronagraphs, adaptive optics and infrared observations.
+</p>
+
+<p>
+Direct imaging is especially useful for planets that are relatively
+far from their stars and emit or reflect detectable radiation.
+</p>
+
+</section>
+
+
+<section id="microlensing">
+
+<h2>6. Gravitational Microlensing</h2>
+
+<p>
+Einstein's general theory of relativity predicts that gravity bends
+light.
+</p>
+
+<p>
+When a foreground star passes almost directly in front of a distant
+background star, the foreground star can temporarily magnify the
+background star.
+</p>
+
+<p>
+If the foreground star has a planet, the planet can create an additional
+brief change in the observed brightness.
+</p>
+
+<p>
+Microlensing is particularly valuable because it can detect planets
+that are difficult to find using other methods.
+</p>
+
+</section>
+
+
+<section id="types">
+
+<h2>7. Types of Exoplanets</h2>
+
+<p>
+Exoplanets display a remarkable range of sizes, masses, compositions
+and orbital properties.
+</p>
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>Category</th>
+<th>General Description</th>
+</tr>
+
+<tr>
+<td>Terrestrial / Rocky</td>
+<td>Small planets dominated by rock and metal, potentially with atmospheres.</td>
+</tr>
+
+<tr>
+<td>Super-Earth</td>
+<td>Planets larger than Earth but smaller than the ice giants of our Solar System.</td>
+</tr>
+
+<tr>
+<td>Mini-Neptune</td>
+<td>Planets between Earth and Neptune in size, often possessing substantial atmospheres.</td>
+</tr>
+
+<tr>
+<td>Gas Giant</td>
+<td>Large planets dominated by hydrogen and helium.</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+<section id="hotjupiter">
+
+<h2>8. Hot Jupiters</h2>
+
+<p>
+One of the most surprising early discoveries in exoplanet science was
+the existence of <strong>hot Jupiters</strong>.
+</p>
+
+<p>
+These are giant planets orbiting extremely close to their host stars.
+Some complete an orbit in only a few days.
+</p>
+
+<p>
+Their high temperatures result from their proximity to their stars.
+</p>
+
+<p>
+The discovery of hot Jupiters demonstrated that planetary systems can
+evolve in ways that differ significantly from the architecture of our
+Solar System.
+</p>
+
+</section>
+
+
+<section id="superearth">
+
+<h2>9. Super-Earths</h2>
+
+<p>
+A <strong>super-Earth</strong> is generally defined as a planet more
+massive than Earth but not as massive as the Solar System's ice giants.
+</p>
+
+<p>
+The name can be misleading: a super-Earth does not necessarily mean
+"Earth 2.0" or a planet suitable for life.
+</p>
+
+<p>
+A super-Earth could have a rocky surface, a thick atmosphere, an ocean
+or other conditions depending on its formation and evolution.
+</p>
+
+</section>
+
+
+<section id="neptune">
+
+<h2>10. Mini-Neptunes</h2>
+
+<p>
+Mini-Neptunes are planets smaller than Neptune but larger than Earth.
+They may possess significant gaseous envelopes around rocky or icy interiors.
+</p>
+
+<p>
+Their atmospheres can strongly affect their observed size and temperature.
+</p>
+
+<p>
+Understanding these planets helps scientists study how planetary
+atmospheres form, evolve and sometimes escape into space.
+</p>
+
+</section>
+
+
+<section id="habitable">
+
+<h2>11. Habitable Zone</h2>
+
+<p>
+The <strong>habitable zone</strong> is the range of orbital distances
+around a star where conditions could allow liquid water to exist on
+the surface of a suitable rocky planet.
+</p>
+
+<p>
+It is sometimes called the "Goldilocks zone."
+</p>
+
+<div class="highlight">
+
+<strong>But there is an important limitation:</strong>
+Being inside the habitable zone does not prove that a planet is
+habitable or contains life.
+
+</div>
+
+<p>
+Atmospheric pressure, composition, clouds, magnetic fields, geological
+activity, stellar radiation and many other factors can influence a
+planet's actual environment.
+</p>
+
+</section>
+
+
+<section id="atmospheres">
+
+<h2>12. Exoplanet Atmospheres</h2>
+
+<p>
+An atmosphere can dramatically change the surface conditions of a planet.
+</p>
+
+<p>
+Astronomers can sometimes study an exoplanet's atmosphere when the
+planet passes in front of its star or when it moves behind the star.
+</p>
+
+<p>
+Different gases absorb different wavelengths of light, leaving distinctive
+spectral signatures.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Hydrogen</h3>
+<p>
+The lightest element and a common component of many giant-planet atmospheres.
+</p>
+</div>
+
+<div class="card">
+<h3>Water Vapour</h3>
+<p>
+Can be detected spectroscopically and is important in planetary climate studies.
+</p>
+</div>
+
+<div class="card">
+<h3>Carbon Dioxide</h3>
+<p>
+A greenhouse gas that can influence planetary atmospheric temperatures.
+</p>
+</div>
+
+<div class="card">
+<h3>Methane</h3>
+<p>
+A carbon-bearing molecule that can participate in atmospheric chemistry.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="biosignatures">
+
+<h2>13. Biosignatures</h2>
+
+<p>
+A <strong>biosignature</strong> is an observable feature that could
+provide evidence for biological activity.
+</p>
+
+<p>
+Scientists are interested in atmospheric combinations of gases that
+would be difficult to maintain without some continuous source.
+</p>
+
+<p>
+However, detecting a potentially interesting molecule is not enough
+to prove that life exists. Non-biological processes can sometimes
+produce similar chemical signatures.
+</p>
+
+<div class="highlight">
+
+<strong>Scientific caution:</strong>
+Finding a possible biosignature would require extensive investigation
+to rule out alternative geological and chemical explanations.
+
+</div>
+
+</section>
+
+
+<section id="earth">
+
+<h2>14. Earth-Like Worlds</h2>
+
+<p>
+Finding a planet similar to Earth is one of the major goals of modern
+exoplanet science.
+</p>
+
+<p>
+But "Earth-like" can mean several different things:
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Size</h3>
+<p>
+A planet with a radius and mass comparable to Earth.
+</p>
+</div>
+
+<div class="card">
+<h3>Composition</h3>
+<p>
+A world dominated by rocky material rather than a thick hydrogen-helium envelope.
+</p>
+</div>
+
+<div class="card">
+<h3>Orbit</h3>
+<p>
+An orbit receiving an appropriate amount of energy from its star.
+</p>
+</div>
+
+<div class="card">
+<h3>Atmosphere</h3>
+<p>
+An atmosphere with physical and chemical conditions potentially compatible
+with surface liquid water.
+</p>
+</div>
+
+</div>
+
+<p>
+No single measurement is enough to establish that a distant planet is
+a true second Earth.
+</p>
+
+</section>
+
+
+<section id="systems">
+
+<h2>15. Planetary Systems</h2>
+
+<p>
+Exoplanet discoveries have shown that planetary systems can have very
+different architectures.
+</p>
+
+<p>
+Some stars host multiple planets packed into compact orbital systems.
+Others contain giant planets far from their stars.
+</p>
+
+<p>
+These observations help scientists test theories of planetary formation
+and migration.
+</p>
+
+<div class="highlight">
+
+<strong>Our Solar System is only one example.</strong>
+The diversity of exoplanet systems shows that planetary formation can
+produce many different outcomes.
+
+</div>
+
+</section>
+
+
+<section id="future">
+
+<h2>16. Future Exploration</h2>
+
+<p>
+Future observatories will allow astronomers to study smaller planets
+and characterize more exoplanet atmospheres.
+</p>
+
+<p>
+Advanced space telescopes and extremely large ground-based telescopes
+will improve our ability to measure planetary temperatures, atmospheric
+composition and orbital properties.
+</p>
+
+<p>
+One of the long-term goals is to determine whether potentially habitable
+worlds have atmospheric signatures consistent with biological activity.
+</p>
+
+</section>
+
+
+<section id="questions">
+
+<h2>17. Open Questions</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>How Common Is Life?</h3>
+<p>
+We still do not know whether life is rare or common beyond Earth.
+</p>
+</div>
+
+<div class="card">
+<h3>How Do Planets Form?</h3>
+<p>
+Planet formation involves complex interactions between dust, gas,
+gravity and time.
+</p>
+</div>
+
+<div class="card">
+<h3>How Do Atmospheres Evolve?</h3>
+<p>
+Stellar radiation, chemistry, geology and atmospheric escape can
+dramatically change a planet over time.
+</p>
+</div>
+
+<div class="card">
+<h3>Are There True Earth Twins?</h3>
+<p>
+Astronomers are searching for worlds that combine Earth-like size,
+composition and environmental conditions.
+</p>
+</div>
+
+<div class="card">
+<h3>Is There Life Elsewhere?</h3>
+<p>
+This remains one of the greatest unanswered questions in science.
+</p>
+</div>
+
+<div class="card">
+<h3>How Many Worlds Exist?</h3>
+<p>
+The known exoplanet population is only a fraction of the planets
+believed to exist in the galaxy.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="summary">
+
+<h2>18. Summary</h2>
+
+<p>
+Exoplanets have transformed our understanding of the universe.
+They demonstrate that planets are not unique to our Solar System and
+that planetary systems can have extraordinary diversity.
+</p>
+
+<p>
+By combining transit observations, radial velocity measurements,
+spectroscopy, gravitational lensing and direct imaging, astronomers
+can investigate distant worlds without physically travelling to them.
+</p>
+
+<p>
+The next generation of observations will focus increasingly on the
+atmospheres and environments of smaller planets.
+</p>
+
+<div class="highlight">
+
+<strong>The big question:</strong>
+
+Among the enormous number of worlds in the galaxy, could some have
+conditions suitable for life?
+
+</div>
+
+</section>
+
+
+<section>
+
+<h2>Scientific References</h2>
+
+<p>
+For further study, useful scientific resources include NASA,
+ESA, the European Southern Observatory, major exoplanet surveys,
+space telescope missions and peer-reviewed astronomy research.
+</p>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+COSMIC ARCHIVE · EXOPLANETS<br>
+Exploring worlds beyond our Solar System.
+
+</footer>
+
+</body>
+</html>

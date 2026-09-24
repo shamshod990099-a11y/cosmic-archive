@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Black Holes — Astrophysics Explorer</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 15% 15%, #211044 0%, transparent 30%),
+                radial-gradient(circle at 85% 30%, #102d50 0%, transparent 30%),
+                radial-gradient(circle at 50% 100%, #160b2d 0%, transparent 35%),
+                #050711;
+            color: #e9ecff;
+            line-height: 1.8;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 7%;
+            background: rgba(5, 7, 17, 0.88);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #a18cff;
+        }
+
+        nav .links a {
+            color: #b8bfdf;
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav .links a:hover {
+            color: white;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 78vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 430px;
+            height: 430px;
+            border-radius: 50%;
+            background:
+                radial-gradient(
+                    circle,
+                    #050505 0%,
+                    #050505 29%,
+                    #b47cff 31%,
+                    #54208d 40%,
+                    transparent 65%
+                );
+            opacity: 0.5;
+            filter: blur(10px);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 950px;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border: 1px solid rgba(163, 137, 255, 0.45);
+            background: rgba(120, 90, 255, 0.08);
+            border-radius: 50px;
+            color: #b9aaff;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-size: clamp(58px, 10vw, 115px);
+            line-height: 0.95;
+            margin-bottom: 30px;
+            letter-spacing: -4px;
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #c7bbff,
+                #765eff
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            max-width: 760px;
+            margin: auto;
+            color: #adb5d5;
+            font-size: 20px;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        /* TOC */
+
+        .toc {
+            padding: 32px;
+            margin: 20px 0 70px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .toc h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .toc ol {
+            padding-left: 25px;
+            columns: 2;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+            color: #aeb6d5;
+        }
+
+        .toc a {
+            color: #a99aff;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            color: white;
+        }
+
+        /* ARTICLE */
+
+        article {
+            padding-bottom: 70px;
+        }
+
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 90px;
+        }
+
+        h2 {
+            font-size: 36px;
+            line-height: 1.2;
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            color: #c8bfff;
+            font-size: 24px;
+            margin: 32px 0 12px;
+        }
+
+        p {
+            color: #bec5df;
+            font-size: 17px;
+            margin-bottom: 18px;
+        }
+
+        strong {
+            color: white;
+        }
+
+        /* HIGHLIGHT */
+
+        .highlight {
+            margin: 30px 0;
+            padding: 26px 28px;
+            border-left: 4px solid #927aff;
+            border-radius: 0 16px 16px 0;
+            background: rgba(130, 100, 255, 0.07);
+        }
+
+        .highlight p {
+            margin: 0;
+        }
+
+        /* FORMULA */
+
+        .formula {
+            margin: 30px 0;
+            padding: 28px;
+            border-radius: 18px;
+            text-align: center;
+            font-family: Georgia, serif;
+            font-size: 29px;
+            color: white;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(130,100,255,0.13),
+                    rgba(40,100,170,0.08)
+                );
+            border: 1px solid rgba(160,140,255,0.25);
+        }
+
+        .formula small {
+            display: block;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #8f98bb;
+            margin-top: 10px;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(230px, 1fr)
+            );
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            padding: 25px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(150,130,255,0.35);
+        }
+
+        .card .number {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .card h3 {
+            margin: 0 0 8px;
+            font-size: 21px;
+        }
+
+        .card p {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* TABLE */
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+            background: rgba(255,255,255,0.025);
+        }
+
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.09);
+        }
+
+        th {
+            background: rgba(130,100,255,0.13);
+            color: white;
+        }
+
+        td {
+            color: #bbc3df;
+        }
+
+        /* FACT BOX */
+
+        .fact-box {
+            margin: 35px 0;
+            padding: 30px;
+            border-radius: 20px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(90,70,180,0.13),
+                    rgba(20,70,120,0.08)
+                );
+            border: 1px solid rgba(150,130,255,0.2);
+        }
+
+        .fact-box .fact-title {
+            color: #b9aaff;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        /* QUOTE */
+
+        .quote {
+            text-align: center;
+            padding: 45px 25px;
+            margin: 50px 0;
+            font-family: Georgia, serif;
+            font-size: 25px;
+            color: #d9d3ff;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* BACK BUTTON */
+
+        .back {
+            display: inline-block;
+            padding: 13px 23px;
+            border-radius: 50px;
+            color: #d1caff;
+            text-decoration: none;
+            background: rgba(120,100,255,0.1);
+            border: 1px solid rgba(150,130,255,0.3);
+            transition: 0.3s;
+        }
+
+        .back:hover {
+            background: rgba(120,100,255,0.22);
+            color: white;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 45px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            color: #747d9f;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #747d9f;
+            margin-bottom: 5px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav .links {
+                display: none;
+            }
+
+            .hero {
+                min-height: 65vh;
+            }
+
+            h1 {
+                font-size: 58px;
+                letter-spacing: -2px;
+            }
+
+            .hero-subtitle {
+                font-size: 17px;
+            }
+
+            .toc ol {
+                columns: 1;
+            }
+
+            h2 {
+                font-size: 29px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="index.html" class="logo">
+        ASTRO<span>PHYSICS</span>
+    </a>
+
+    <div class="links">
+        <a href="index.html">Home</a>
+        <a href="stars.html">Stars</a>
+        <a href="#article">Article</a>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ASTROPHYSICS • EXTREME OBJECTS
+        </div>
+
+        <h1>BLACK HOLES</h1>
+
+        <p class="hero-subtitle">
+            The darkest objects in the universe — regions of spacetime
+            where gravity becomes so extreme that an event horizon forms.
+        </p>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- TABLE OF CONTENTS -->
+
+<div class="toc">
+
+    <h2>Table of Contents</h2>
+
+    <ol>
+
+        <li><a href="#what">What Is a Black Hole?</a></li>
+
+        <li><a href="#gravity">Gravity and Spacetime</a></li>
+
+        <li><a href="#formation">How Black Holes Form</a></li>
+
+        <li><a href="#event-horizon">The Event Horizon</a></li>
+
+        <li><a href="#schwarzschild">Schwarzschild Radius</a></li>
+
+        <li><a href="#singularity">The Singularity</a></li>
+
+        <li><a href="#types">Types of Black Holes</a></li>
+
+        <li><a href="#stellar">Stellar-Mass Black Holes</a></li>
+
+        <li><a href="#intermediate">Intermediate-Mass Black Holes</a></li>
+
+        <li><a href="#supermassive">Supermassive Black Holes</a></li>
+
+        <li><a href="#accretion">Accretion Disks</a></li>
+
+        <li><a href="#jets">Relativistic Jets</a></li>
+
+        <li><a href="#time">Time Near a Black Hole</a></li>
+
+        <li><a href="#spaghettification">Tidal Forces</a></li>
+
+        <li><a href="#hawking">Hawking Radiation</a></li>
+
+        <li><a href="#mergers">Black Hole Mergers</a></li>
+
+        <li><a href="#waves">Gravitational Waves</a></li>
+
+        <li><a href="#detection">How We Detect Black Holes</a></li>
+
+        <li><a href="#m87">M87*</a></li>
+
+        <li><a href="#sagittarius">Sagittarius A*</a></li>
+
+        <li><a href="#questions">Open Questions</a></li>
+
+        <li><a href="#summary">Summary</a></li>
+
+    </ol>
+
+</div>
+
+
+<article id="article">
+
+
+<!-- 01 -->
+
+<section id="what">
+
+    <h2>01. What Is a Black Hole?</h2>
+
+    <p>
+        A black hole is a region of spacetime where gravity becomes
+        sufficiently strong that there is a boundary beyond which
+        signals cannot escape to distant observers.
+    </p>
+
+    <p>
+        That boundary is called the
+        <strong>event horizon</strong>.
+    </p>
+
+    <p>
+        Black holes are not holes in the ordinary sense. They are
+        physical solutions of Einstein's general theory of relativity
+        and can form when matter becomes concentrated enough for
+        spacetime to develop a trapped region.
+    </p>
+
+    <div class="highlight">
+
+        <p>
+            <strong>Key idea:</strong>
+            A black hole is defined by its spacetime geometry and
+            event horizon — not by an empty tunnel or ordinary hole.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- 02 -->
+
+<section id="gravity">
+
+    <h2>02. Gravity and Spacetime</h2>
+
+    <p>
+        Newton described gravity as a force between masses.
+        Einstein's general relativity gives a deeper description:
+        matter and energy influence the geometry of spacetime.
+    </p>
+
+    <p>
+        Massive objects change the geometry around them, and freely
+        moving objects follow paths determined by that geometry.
+    </p>
+
+    <p>
+        Black holes represent one of the most extreme known
+        manifestations of this effect.
+    </p>
+
+    <div class="formula">
+
+        G<sub>μν</sub> + Λg<sub>μν</sub>
+        =
+        (8πG/c<sup>4</sup>)T<sub>μν</sub>
+
+        <small>
+            Einstein field equation
+        </small>
+
+    </div>
+
+    <p>
+        The equation relates the geometry of spacetime to the
+        distribution of matter and energy.
+    </p>
+
+</section>
+
+
+<!-- 03 -->
+
+<section id="formation">
+
+    <h2>03. How Black Holes Form</h2>
+
+    <p>
+        One important formation mechanism occurs at the end of the
+        lives of some massive stars.
+    </p>
+
+    <p>
+        During much of a massive star's lifetime, energy released by
+        nuclear fusion helps support the star against gravitational
+        collapse.
+    </p>
+
+    <p>
+        When the star can no longer maintain sufficient internal
+        support, its core can collapse rapidly.
+    </p>
+
+    <p>
+        Depending on the remaining core mass and the physics of the
+        collapse, the result can be a neutron star or a black hole.
+    </p>
+
+    <h3>Black Holes Can Also Grow</h3>
+
+    <p>
+        Once formed, a black hole can gain mass by accreting matter
+        and by merging with other compact objects.
+    </p>
+
+    <div class="fact-box">
+
+        <div class="fact-title">
+            IMPORTANT
+        </div>
+
+        <p>
+            The formation of the earliest supermassive black holes is
+            still an active research problem in astrophysics.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- 04 -->
+
+<section id="event-horizon">
+
+    <h2>04. The Event Horizon</h2>
+
+    <p>
+        The event horizon is the boundary separating the region from
+        which light can still escape from the region where no signal
+        can reach distant observers.
+    </p>
+
+    <p>
+        It is important to understand that the event horizon is not
+        necessarily a solid surface.
+    </p>
+
+    <p>
+        An observer falling toward a sufficiently massive black hole
+        would not encounter a physical wall at the horizon.
+    </p>
+
+    <div class="highlight">
+
+        <p>
+            The phrase "nothing can escape" means that after crossing
+            the event horizon, no future-directed path can carry
+            information back to the outside universe.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- 05 -->
+
+<section id="schwarzschild">
+
+    <h2>05. Schwarzschild Radius</h2>
+
+    <p>
+        For a non-rotating and electrically neutral black hole,
+        the radius of the event horizon is called the
+        <strong>Schwarzschild radius</strong>.
+    </p>
+
+    <div class="formula">
+
+        r<sub>s</sub> = 2GM / c<sup>2</sup>
+
+        <small>
+            Schwarzschild radius
+        </small>
+
+    </div>
+
+    <p>
+        Here:
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="number">rₛ</div>
+            <h3>Radius</h3>
+            <p>
+                The Schwarzschild radius of a non-rotating black hole.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="number">G</div>
+            <h3>Gravity</h3>
+            <p>
+                The universal gravitational constant.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="number">M</div>
+            <h3>Mass</h3>
+            <p>
+                The mass of the black hole.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="number">c</div>
+            <h3>Light</h3>
+            <p>
+                The speed of light in vacuum.
+            </p>
+        </div>
+
+    </div>
+
+    <p>
+        The radius is directly proportional to the mass. A more massive
+        black hole therefore has a larger event horizon.
+    </p>
+
+</section>
+
+
+<!-- 06 -->
+
+<section id="singularity">
+
+    <h2>06. The Singularity</h2>
+
+    <p>
+        Classical general relativity predicts that, inside an idealized
+        black hole, spacetime can reach a singular region.
+    </p>
+
+    <p>
+        This is commonly called the
+        <strong>singularity</strong>.
+    </p>
+
+    <p>
+        However, the singularity should not simply be imagined as a
+        normal physical object containing infinite material density.
+    </p>
+
+    <p>
+        Instead, it signals that classical general relativity may no
+        longer provide a complete description under such extreme
+        conditions.
+    </p>
+
+    <div class="highlight">
+
+        <p>
+            A complete theory of quantum gravity may be necessary to
+            understand what actually happens in the deepest interior.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- 07 -->
+
+<section id="types">
+
+    <h2>07. Types of Black Holes</h2>
+
+    <p>
+        Astronomers generally classify black holes according to their
+        masses and likely formation histories.
+    </p>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <tr>
+                <th>Type</th>
+                <th>Approximate scale</th>
+                <th>Typical context</th>
+            </tr>
+
+            <tr>
+                <td>Stellar-mass</td>
+                <td>Several to many solar masses</td>
+                <td>Stellar evolution and collapse</td>
+            </tr>
+
+            <tr>
+                <td>Intermediate-mass</td>
+                <td>Hundreds to hundreds of thousands of solar masses</td>
+                <td>Formation and growth under investigation</td>
+            </tr>
+
+            <tr>
+                <td>Supermassive</td>
+                <td>Millions to billions of solar masses</td>
+                <td>Centers of galaxies</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- 08 -->
+
+<section id="stellar">
+
+    <h2>08. Stellar-Mass Black Holes</h2>
+
+    <p>
+        Stellar-mass black holes are thought to form primarily through
+        the evolution and collapse of massive stars, although binary
+        interactions can strongly influence their final properties.
+    </p>
+
+    <p>
+        Many stellar-mass black holes are discovered in binary systems.
+    </p>
+
+    <p>
+        If a black hole orbits a normal star, astronomers can observe
+        the motion of that star and use it to infer the presence and
+        mass of the unseen companion.
+    </p>
+
+</section>
+
+
+<!-- 09 -->
+
+<section id="intermediate">
+
+    <h2>09. Intermediate-Mass Black Holes</h2>
+
+    <p>
+        Intermediate-mass black holes are expected to lie between
+        stellar-mass and supermassive black holes.
+    </p>
+
+    <p>
+        They are particularly interesting because they could help
+        explain how the first massive black holes grew into the
+        supermassive objects found in galaxy centers.
+    </p>
+
+    <p>
+        Finding and studying this population remains an important
+        observational challenge.
+    </p>
+
+</section>
+
+
+<!-- 10 -->
+
+<section id="supermassive">
+
+    <h2>10. Supermassive Black Holes</h2>
+
+    <p>
+        Supermassive black holes can contain millions or billions of
+        solar masses.
+    </p>
+
+    <p>
+        They are found at the centers of many galaxies.
+    </p>
+
+    <p>
+        Their growth can be connected with accretion of gas and mergers
+        with other black holes.
+    </p>
+
+    <p>
+        The relationship between supermassive black holes and the
+        evolution of their host galaxies is one of the major topics
+        in modern astrophysics.
+    </p>
+
+    <div class="quote">
+
+        "Black holes are not isolated objects — they can influence
+        the environments and galaxies around them."
+
+    </div>
+
+</section>
+
+
+<!-- 11 -->
+
+<section id="accretion">
+
+    <h2>11. Accretion Disks</h2>
+
+    <p>
+        Matter approaching a black hole often possesses angular
+        momentum. Instead of falling directly inward, gas can form a
+        rotating structure called an <strong>accretion disk</strong>.
+    </p>
+
+    <p>
+        The gas in an accretion disk can become extremely hot.
+        Gravitational energy is converted into thermal energy and
+        electromagnetic radiation as matter moves inward.
+    </p>
+
+    <p>
+        This is why some black-hole systems can be extremely bright
+        even though the black hole itself does not emit ordinary light
+        from inside its event horizon.
+    </p>
+
+    <div class="fact-box">
+
+        <div class="fact-title">
+            ASTRONOMICAL CLUE
+        </div>
+
+        <p>
+            X-rays from hot accretion disks are one of the important
+            ways astronomers identify stellar and supermassive black
+            hole systems.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- 12 -->
+
+<section id="jets">
+
+    <h2>12. Relativistic Jets</h2>
+
+    <p>
+        Some actively accreting black holes produce enormous jets of
+        plasma.
+    </p>
+
+    <p>
+        These jets can travel at speeds extremely close to the speed
+        of light and can extend far beyond the central region of the
+        host galaxy.
+    </p>
+
+    <p>
+        Strong magnetic fields are thought to play an important role
+        in launching and shaping these jets.
+    </p>
+
+    <p>
+        The exact details of jet formation remain an active area of
+        theoretical and observational research.
+    </p>
+
+</section>
+
+
+<!-- 13 -->
+
+<section id="time">
+
+    <h2>13. Time Near a Black Hole</h2>
+
+    <p>
+        General relativity predicts that gravity affects the passage
+        of time.
+    </p>
+
+    <p>
+        A clock deeper inside a gravitational field can run at a
+        different rate compared with a clock located farther away.
+    </p>
+
+    <p>
+        Near a black hole, these effects can become extremely strong.
+    </p>
+
+    <p>
+        A distant observer can see signals from an object approaching
+        the horizon become increasingly redshifted and delayed.
+    </p>
+
+    <div class="highlight">
+
+        <p>
+            This does not mean that time literally "stops" for the
+            falling observer. The description depends on the observer's
+            reference frame and the spacetime geometry.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- 14 -->
+
+<section id="spaghettification">
+
+    <h2>14. Tidal Forces and "Spaghettification"</h2>
+
+    <p>
+        Gravity does not have exactly the same strength at every point
+        on an extended object.
+    </p>
+
+    <p>
+        The difference in gravitational acceleration across an object
+        creates <strong>tidal forces</strong>.
+    </p>
+
+    <p>
+        Near a black hole, these differences can become enormous.
+        An object approaching a small black hole can experience
+        extremely strong stretching and compression.
+    </p>
+
+    <p>
+        Popular science often calls this process
+        <strong>"spaghettification."</strong>
+    </p>
+
+    <p>
+        For a supermassive black hole, however, tidal forces at the
+        event horizon can be much weaker than those near a stellar-mass
+        black hole.
+    </p>
+
+</section>
+
+
+<!-- 15 -->
+
+<section id="hawking">
+
+    <h2>15. Hawking Radiation</h2>
+
+    <p>
+        In the 1970s, physicist Stephen Hawking showed that quantum
+        field theory in curved spacetime predicts that black holes
+        should emit thermal radiation.
+    </p>
+
+    <p>
+        This phenomenon is known as
+        <strong>Hawking radiation</strong>.
+    </p>
+
+    <p>
+        The predicted temperature decreases as black-hole mass
+        increases.
+    </p>
+
+    <div class="formula">
+
+        T ∝ 1 / M
+
+        <small>
+            Hawking temperature is inversely related to black-hole mass
+        </small>
+
+    </div>
+
+    <p>
+        For ordinary astrophysical black holes, this radiation is
+        expected to be extraordinarily weak compared with the
+        radiation from their surroundings.
+    </p>
+
+</section>
+
+
+<!-- 16 -->
+
+<section id="mergers">
+
+    <h2>16. Black Hole Mergers</h2>
+
+    <p>
+        Two black holes can orbit one another.
+    </p>
+
+    <p>
+        Their changing gravitational field can emit gravitational
+        waves, carrying energy away from the system.
+    </p>
+
+    <p>
+        As the system loses orbital energy, the two black holes can
+        spiral closer together.
+    </p>
+
+    <p>
+        Eventually they can merge into a single larger black hole.
+    </p>
+
+    <div class="highlight">
+
+        <p>
+            A black-hole merger is one of the most energetic events
+            known in the universe, with part of the system's mass-energy
+            carried away as gravitational radiation.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- 17 -->
+
+<section id="waves">
+
+    <h2>17. Gravitational Waves</h2>
+
+    <p>
+        Gravitational waves are propagating disturbances in the
+        geometry of spacetime.
+    </p>
+
+    <p>
+        Einstein's general theory of relativity predicted their
+        existence.
+    </p>
+
+    <p>
+        In 2015, the LIGO observatory made the first direct detection
+        of gravitational waves, produced by the merger of two
+        stellar-mass black holes.
+    </p>
+
+    <p>
+        This opened a new way of studying the universe.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="number">01</div>
+
+            <h3>Light</h3>
+
+            <p>
+                Traditional astronomy observes electromagnetic radiation.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <div class="number">02</div>
+
+            <h3>Gravity</h3>
+
+            <p>
+                Gravitational-wave astronomy observes spacetime itself.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <div class="number">03</div>
+
+            <h3>New Window</h3>
+
+            <p>
+                Together they reveal different information about cosmic
+                objects.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- 18 -->
+
+<section id="detection">
+
+    <h2>18. How Do We Detect Black Holes?</h2>
+
+    <p>
+        A black hole cannot be seen directly by ordinary visible light
+        coming from inside its event horizon.
+    </p>
+
+    <p>
+        Astronomers therefore study the effects black holes have on
+        their surroundings.
+    </p>
+
+    <h3>Method 1 — Stellar Orbits</h3>
+
+    <p>
+        A visible star can orbit an unseen massive object. Measuring
+        the orbit can reveal the object's mass.
+    </p>
+
+    <h3>Method 2 — Accretion Radiation</h3>
+
+    <p>
+        Hot material falling toward a black hole can emit powerful
+        X-rays and other radiation.
+    </p>
+
+    <h3>Method 3 — Gravitational Waves</h3>
+
+    <p>
+        Merging black holes produce gravitational waves detectable by
+        large interferometers.
+    </p>
+
+    <h3>Method 4 — Gravitational Lensing</h3>
+
+    <p>
+        Strong gravity can bend light passing near a compact massive
+        object.
+    </p>
+
+    <h3>Method 5 — Black-Hole Shadows</h3>
+
+    <p>
+        Very high-resolution radio observations can reveal the
+        characteristic shadow produced by the strong gravitational
+        field around a black hole.
+    </p>
+
+</section>
+
+
+<!-- 19 -->
+
+<section id="m87">
+
+    <h2>19. M87* — The First Black Hole Image</h2>
+
+    <p>
+        In April 2019, the Event Horizon Telescope collaboration
+        released the first image of a black hole's shadow.
+    </p>
+
+    <p>
+        The target was the supermassive black hole at the center of
+        the galaxy Messier 87.
+    </p>
+
+    <p>
+        It is commonly called <strong>M87*</strong>.
+    </p>
+
+    <p>
+        The image showed a bright ring-like structure surrounding a
+        darker central region.
+    </p>
+
+    <p>
+        The darker region corresponds to the black-hole shadow,
+        produced by the strong gravitational bending and capture of
+        light near the event horizon.
+    </p>
+
+    <div class="fact-box">
+
+        <div class="fact-title">
+            WHY IT MATTERED
+        </div>
+
+        <p>
+            The observation provided a remarkable visual test of
+            predictions from strong-field general relativity.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- 20 -->
+
+<section id="sagittarius">
+
+    <h2>20. Sagittarius A*</h2>
+
+    <p>
+        At the center of our Milky Way galaxy lies a supermassive
+        black hole known as <strong>Sagittarius A*</strong>, or
+        Sgr A*.
+    </p>
+
+    <p>
+        Its mass is approximately four million times the mass of
+        the Sun.
+    </p>
+
+    <p>
+        Astronomers have tracked stars orbiting the center of the
+        Milky Way for decades.
+    </p>
+
+    <p>
+        These stellar orbits provide powerful evidence for a compact,
+        extremely massive object at the galactic center.
+    </p>
+
+    <p>
+        In 2022, the Event Horizon Telescope collaboration released
+        the first image of Sagittarius A*.
+    </p>
+
+</section>
+
+
+<!-- 21 -->
+
+<section id="questions">
+
+    <h2>21. Open Questions</h2>
+
+    <p>
+        Black holes are strongly supported by observations, but many
+        fundamental questions remain unanswered.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="number">⚛️</div>
+
+            <h3>Quantum Gravity</h3>
+
+            <p>
+                What happens when quantum mechanics and extreme
+                gravitational curvature must be described together?
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <div class="number">🧩</div>
+
+            <h3>Information</h3>
+
+            <p>
+                How is quantum information ultimately handled by a
+                black hole?
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <div class="number">🌌</div>
+
+            <h3>First Black Holes</h3>
+
+            <p>
+                How did the earliest supermassive black holes grow so
+                rapidly in the young universe?
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <div class="number">🔭</div>
+
+            <h3>Extreme Physics</h3>
+
+            <p>
+                Can future observations reveal new physics near event
+                horizons?
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- 22 -->
+
+<section id="summary">
+
+    <h2>22. Summary</h2>
+
+    <p>
+        Black holes are among the most extreme predictions of modern
+        physics.
+    </p>
+
+    <p>
+        They can form from stellar collapse, grow by accretion and
+        merge with other compact objects.
+    </p>
+
+    <p>
+        Their presence can be revealed through the motion of stars,
+        radiation from accretion disks, gravitational lensing,
+        gravitational waves and black-hole shadows.
+    </p>
+
+    <p>
+        The study of black holes connects astrophysics, general
+        relativity, quantum theory and cosmology.
+    </p>
+
+    <div class="formula">
+
+        BLACK HOLE =
+        MASS + GRAVITY + SPACETIME + EXTREME PHYSICS
+
+    </div>
+
+</section>
+
+
+<!-- REFERENCES -->
+
+<section>
+
+    <h2>Scientific References</h2>
+
+    <p>
+        The concepts presented in this article are based on established
+        areas of astrophysics and general relativity.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>General Relativity</h3>
+
+            <p>
+                Albert Einstein's theory describing gravity as the
+                geometry of spacetime.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>LIGO</h3>
+
+            <p>
+                Gravitational-wave observatories that detect tiny
+                changes in spacetime caused by cosmic events.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Event Horizon Telescope</h3>
+
+            <p>
+                A global network of radio observatories used to study
+                black-hole environments at extremely high resolution.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>NASA</h3>
+
+            <p>
+                Space-based missions and research programs investigating
+                black holes and high-energy astrophysics.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BACK -->
+
+<a href="index.html" class="back">
+    ← Back to Astrophysics Explorer
+</a>
+
+
+</article>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 Astrophysics Explorer
+    </p>
+
+    <p>
+        Exploring the universe through science.
+    </p>
+
+</footer>
+
+
+</body>
+</html>

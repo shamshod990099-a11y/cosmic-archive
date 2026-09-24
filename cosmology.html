@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cosmology | Cosmic Archive</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    color:#eaf2ff;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(70,80,190,.25), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(140,60,190,.20), transparent 28%),
+        radial-gradient(circle at 50% 90%, rgba(30,120,190,.18), transparent 32%),
+        #050812;
+    line-height:1.75;
+}
+
+a{
+    color:inherit;
+}
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+/* NAVIGATION */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(14px);
+    background:rgba(5,8,18,.84);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav-inner{
+    width:min(1100px,92%);
+    margin:auto;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#8d9cff;
+}
+
+.back{
+    text-decoration:none;
+    padding:9px 16px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:999px;
+    transition:.25s;
+}
+
+.back:hover{
+    background:rgba(255,255,255,.1);
+}
+
+/* HERO */
+
+.hero{
+    min-height:520px;
+    display:flex;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:520px;
+    height:520px;
+    border-radius:50%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:
+        radial-gradient(circle,
+        rgba(210,220,255,.85) 0%,
+        rgba(110,120,255,.42) 18%,
+        rgba(90,50,180,.20) 42%,
+        transparent 72%);
+    filter:blur(14px);
+    opacity:.7;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:100%;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 15px;
+    border-radius:999px;
+    border:1px solid rgba(140,155,255,.3);
+    background:rgba(100,110,255,.08);
+    color:#b8c0ff;
+    font-size:13px;
+    letter-spacing:1px;
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:clamp(45px,8vw,86px);
+    line-height:1;
+    margin-bottom:22px;
+    background:linear-gradient(90deg,#fff,#c7d0ff,#8c9cff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:760px;
+    margin:auto;
+    color:#b9c5da;
+    font-size:18px;
+}
+
+/* CONTENT */
+
+main{
+    padding-bottom:80px;
+}
+
+.toc{
+    margin:35px 0 60px;
+    padding:25px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:18px;
+}
+
+.toc h2{
+    margin-bottom:15px;
+    color:#fff;
+}
+
+.toc-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:8px 25px;
+}
+
+.toc a{
+    color:#aebbd2;
+    text-decoration:none;
+}
+
+.toc a:hover{
+    color:#9faaff;
+}
+
+section{
+    margin-bottom:65px;
+    scroll-margin-top:85px;
+}
+
+section h2{
+    font-size:32px;
+    margin-bottom:18px;
+    color:#fff;
+}
+
+section h3{
+    font-size:22px;
+    margin:28px 0 10px;
+    color:#d0d6ff;
+}
+
+section p{
+    color:#b8c4d8;
+    margin-bottom:15px;
+}
+
+strong{
+    color:#fff;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+    margin:25px 0;
+}
+
+.card{
+    padding:23px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:17px;
+}
+
+.card h3{
+    margin:0 0 8px;
+    color:#fff;
+}
+
+.card p{
+    margin:0;
+    font-size:15px;
+}
+
+/* FORMULA */
+
+.formula{
+    margin:25px 0;
+    padding:22px;
+    text-align:center;
+    font-family:Georgia,serif;
+    font-size:25px;
+    color:#d7ddff;
+    background:rgba(100,110,255,.06);
+    border-left:4px solid #8996ff;
+    border-radius:10px;
+    overflow-x:auto;
+}
+
+/* TABLE */
+
+.table-wrap{
+    overflow-x:auto;
+    margin:25px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+    background:rgba(255,255,255,.035);
+    border-radius:12px;
+    overflow:hidden;
+}
+
+th,td{
+    padding:14px;
+    text-align:left;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+th{
+    color:#d3d8ff;
+    background:rgba(100,110,255,.08);
+}
+
+td{
+    color:#b9c5d8;
+}
+
+/* HIGHLIGHT */
+
+.highlight{
+    margin:25px 0;
+    padding:24px;
+    border-radius:16px;
+    background:linear-gradient(
+        135deg,
+        rgba(80,100,255,.10),
+        rgba(150,70,200,.08)
+    );
+    border:1px solid rgba(140,150,255,.15);
+}
+
+.highlight strong{
+    color:#aeb9ff;
+}
+
+/* FOOTER */
+
+footer{
+    padding:35px 0;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#78859c;
+    font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .nav-inner{
+        height:58px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .back{
+        font-size:13px;
+        padding:7px 12px;
+    }
+
+    .hero{
+        min-height:450px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    section h2{
+        font-size:27px;
+    }
+
+    .formula{
+        font-size:21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <div class="logo">
+            COSMIC<span>ARCHIVE</span>
+        </div>
+
+        <a href="index.html" class="back">
+            ← Back to Universe
+        </a>
+    </div>
+</nav>
+
+
+<header class="hero">
+
+    <div class="hero-content container">
+
+        <div class="badge">
+            THE SCIENCE OF THE UNIVERSE
+        </div>
+
+        <h1>COSMOLOGY</h1>
+
+        <p>
+            The study of the universe as a whole — its origin,
+            evolution, structure, contents and possible future.
+        </p>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<div class="toc">
+
+<h2>Contents</h2>
+
+<div class="toc-grid">
+
+<a href="#what">1. What Is Cosmology?</a>
+<a href="#bigbang">2. The Big Bang</a>
+<a href="#expansion">3. Expansion of the Universe</a>
+<a href="#cmb">4. Cosmic Microwave Background</a>
+<a href="#nucleosynthesis">5. Big Bang Nucleosynthesis</a>
+<a href="#structure">6. Cosmic Structure</a>
+<a href="#darkmatter">7. Dark Matter</a>
+<a href="#darkenergy">8. Dark Energy</a>
+<a href="#redshift">9. Cosmological Redshift</a>
+<a href="#hubble">10. Hubble's Law</a>
+<a href="#age">11. Age of the Universe</a>
+<a href="#geometry">12. Geometry of the Universe</a>
+<a href="#inflation">13. Cosmic Inflation</a>
+<a href="#multiverse">14. Multiverse</a>
+<a href="#future">15. Future of the Universe</a>
+<a href="#questions">16. Open Questions</a>
+<a href="#summary">17. Summary</a>
+
+</div>
+
+</div>
+
+
+<section id="what">
+
+<h2>1. What Is Cosmology?</h2>
+
+<p>
+<strong>Cosmology</strong> is the scientific study of the universe
+on the largest possible scales.
+</p>
+
+<p>
+It asks fundamental questions such as:
+How did the universe begin?
+How has it changed?
+What is it made of?
+Why is it expanding?
+And what could happen to it in the distant future?
+</p>
+
+<p>
+Modern cosmology combines observations from astronomy with physics,
+especially general relativity, particle physics and thermodynamics.
+</p>
+
+<div class="highlight">
+
+<strong>Important distinction:</strong>
+Astronomy studies individual objects and systems, while cosmology
+focuses on the universe as a whole and its large-scale evolution.
+
+</div>
+
+</section>
+
+
+<section id="bigbang">
+
+<h2>2. The Big Bang</h2>
+
+<p>
+The <strong>Big Bang model</strong> describes the universe as having
+evolved from an extremely hot and dense early state.
+</p>
+
+<p>
+It is important to understand that the Big Bang was not simply an
+ordinary explosion occurring at one location in pre-existing space.
+Instead, the model describes the expansion and evolution of space itself.
+</p>
+
+<p>
+As the universe expanded, it cooled. Particles formed, nuclei developed,
+atoms eventually formed, and later stars and galaxies emerged.
+</p>
+
+<div class="formula">
+Hot, Dense Early Universe → Expansion → Cooling → Structure Formation
+</div>
+
+</section>
+
+
+<section id="expansion">
+
+<h2>3. Expansion of the Universe</h2>
+
+<p>
+One of the most important discoveries in modern cosmology is that
+the universe is expanding.
+</p>
+
+<p>
+On very large scales, distant galaxies generally appear to be moving
+away from one another as space expands.
+</p>
+
+<p>
+This does not mean that galaxies are necessarily flying through space
+from one central explosion. Rather, the distances between large-scale
+structures increase as the universe evolves.
+</p>
+
+<div class="highlight">
+
+<strong>Balloon analogy:</strong>
+Imagine dots drawn on the surface of an expanding balloon. As the
+surface expands, every dot sees other dots getting farther away.
+There is no single dot on the surface that represents the center
+of the expansion.
+
+</div>
+
+</section>
+
+
+<section id="cmb">
+
+<h2>4. Cosmic Microwave Background</h2>
+
+<p>
+The <strong>Cosmic Microwave Background (CMB)</strong> is faint
+electromagnetic radiation filling the universe.
+</p>
+
+<p>
+It comes from a time when the universe had cooled enough for electrons
+and nuclei to combine into neutral atoms. Once this happened, photons
+could travel much more freely through space.
+</p>
+
+<p>
+Today this ancient radiation has been stretched by cosmic expansion
+into the microwave portion of the electromagnetic spectrum.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Ancient Light</h3>
+<p>
+The CMB provides a view of the universe when it was much younger
+than it is today.
+</p>
+</div>
+
+<div class="card">
+<h3>Temperature Fluctuations</h3>
+<p>
+Tiny variations in the CMB contain information about early density
+differences in the universe.
+</p>
+</div>
+
+<div class="card">
+<h3>Cosmological Evidence</h3>
+<p>
+Measurements of the CMB strongly constrain models of the universe's
+composition and evolution.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="nucleosynthesis">
+
+<h2>5. Big Bang Nucleosynthesis</h2>
+
+<p>
+During the first few minutes of cosmic history, the universe was hot
+and dense enough for nuclear reactions to occur.
+</p>
+
+<p>
+This process, called <strong>Big Bang nucleosynthesis</strong>,
+produced much of the universe's early hydrogen and helium, along with
+small amounts of other light nuclei.
+</p>
+
+<p>
+Heavier elements were produced later inside stars and through other
+astrophysical processes.
+</p>
+
+</section>
+
+
+<section id="structure">
+
+<h2>6. Cosmic Structure</h2>
+
+<p>
+The universe is not randomly distributed on the largest scales.
+Galaxies form an enormous network of structures known as the
+<strong>cosmic web</strong>.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Galaxies</h3>
+<p>
+Large gravitationally bound systems containing stars, gas, dust and
+dark matter.
+</p>
+</div>
+
+<div class="card">
+<h3>Galaxy Clusters</h3>
+<p>
+Groups of galaxies bound together by gravity.
+</p>
+</div>
+
+<div class="card">
+<h3>Filaments</h3>
+<p>
+Long structures connecting galaxy groups and clusters across cosmic
+distances.
+</p>
+</div>
+
+<div class="card">
+<h3>Voids</h3>
+<p>
+Enormous regions containing relatively few galaxies compared with
+dense cosmic structures.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="darkmatter">
+
+<h2>7. Dark Matter</h2>
+
+<p>
+<strong>Dark matter</strong> is a form of matter inferred from its
+gravitational effects.
+</p>
+
+<p>
+It does not appear to interact strongly with electromagnetic radiation,
+which makes it difficult to observe directly.
+</p>
+
+<p>
+Evidence for dark matter comes from several phenomena, including
+galaxy rotation, gravitational lensing and the formation of cosmic
+structure.
+</p>
+
+<div class="formula">
+Observed Gravity ≠ Visible Matter Alone
+</div>
+
+<p>
+The exact physical identity of dark matter remains unknown.
+</p>
+
+</section>
+
+
+<section id="darkenergy">
+
+<h2>8. Dark Energy</h2>
+
+<p>
+Observations indicate that the expansion of the universe is accelerating.
+The unknown component associated with this accelerated expansion is
+commonly called <strong>dark energy</strong>.
+</p>
+
+<p>
+The simplest explanation is a cosmological constant associated with
+the energy of empty space, but other possibilities have also been
+investigated.
+</p>
+
+<div class="highlight">
+
+<strong>Dark matter and dark energy are not the same thing.</strong>
+
+Dark matter contributes gravitational attraction and helps form cosmic
+structure, while dark energy is associated with the accelerated expansion
+of the universe.
+
+</div>
+
+</section>
+
+
+<section id="redshift">
+
+<h2>9. Cosmological Redshift</h2>
+
+<p>
+When light travels through an expanding universe, its wavelength can
+be stretched along with the expansion of space.
+</p>
+
+<p>
+This effect is called <strong>cosmological redshift</strong>.
+</p>
+
+<div class="formula">
+z = (λ<sub>observed</sub> − λ<sub>emitted</sub>) / λ<sub>emitted</sub>
+</div>
+
+<p>
+For distant galaxies, larger redshift generally corresponds to greater
+cosmic expansion between the time the light was emitted and the time
+it was observed.
+</p>
+
+</section>
+
+
+<section id="hubble">
+
+<h2>10. Hubble's Law</h2>
+
+<p>
+The relationship between distance and recession velocity on large
+scales is commonly expressed through Hubble's law.
+</p>
+
+<div class="formula">
+v = H<sub>0</sub>d
+</div>
+
+<p>
+Here, <strong>v</strong> represents recession velocity,
+<strong>d</strong> represents distance, and <strong>H<sub>0</sub></strong>
+is the present-day Hubble parameter.
+</p>
+
+<p>
+Determining the precise value of the Hubble parameter is an active area
+of research because different measurement techniques have produced
+somewhat different results.
+</p>
+
+</section>
+
+
+<section id="age">
+
+<h2>11. Age of the Universe</h2>
+
+<p>
+Measurements of the expansion history, cosmic microwave background,
+stellar populations and other observations indicate that the universe
+is approximately <strong>13.8 billion years old</strong>.
+</p>
+
+<p>
+This number is not obtained by simply finding the oldest star.
+It comes from models describing the evolution of the universe combined
+with multiple independent observations.
+</p>
+
+</section>
+
+
+<section id="geometry">
+
+<h2>12. Geometry of the Universe</h2>
+
+<p>
+General relativity connects matter and energy with the geometry of
+spacetime.
+</p>
+
+<p>
+On very large scales, cosmologists investigate whether the universe is
+approximately flat, positively curved or negatively curved.
+</p>
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>Geometry</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td>Flat</td>
+<td>Large-scale geometry approximately follows Euclidean rules.</td>
+</tr>
+
+<tr>
+<td>Positive Curvature</td>
+<td>Space has a geometry analogous to the surface of a sphere, generalized to higher dimensions.</td>
+</tr>
+
+<tr>
+<td>Negative Curvature</td>
+<td>Space has a saddle-like large-scale geometry.</td>
+</tr>
+
+</table>
+
+</div>
+
+<p>
+Current observations are consistent with a universe that is very close
+to spatially flat on observable scales.
+</p>
+
+</section>
+
+
+<section id="inflation">
+
+<h2>13. Cosmic Inflation</h2>
+
+<p>
+<strong>Cosmic inflation</strong> is a hypothesis proposing that the
+very early universe underwent an extremely rapid period of expansion.
+</p>
+
+<p>
+Inflation was developed to explain several features of the observed
+universe, including its large-scale uniformity and near-flat geometry.
+</p>
+
+<p>
+Quantum fluctuations during inflation may also have been stretched to
+cosmological scales and later helped seed the formation of galaxies
+and other structures.
+</p>
+
+<div class="highlight">
+
+Inflation is an important part of modern early-universe research,
+but the detailed physics responsible for inflation remains unknown.
+
+</div>
+
+</section>
+
+
+<section id="multiverse">
+
+<h2>14. Multiverse</h2>
+
+<p>
+Some theoretical models in physics suggest the possibility that our
+observable universe could be part of a much larger structure containing
+multiple regions or universes.
+</p>
+
+<p>
+These ideas are often grouped under the term <strong>multiverse</strong>.
+</p>
+
+<p>
+However, different multiverse proposals make different predictions,
+and there is currently no established observational evidence confirming
+the existence of other universes.
+</p>
+
+</section>
+
+
+<section id="future">
+
+<h2>15. Future of the Universe</h2>
+
+<p>
+The ultimate fate of the universe depends strongly on its expansion
+history and the physical nature of dark energy.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Heat Death</h3>
+<p>
+If accelerated expansion continues, the universe could gradually become
+colder, darker and less capable of supporting new energetic processes.
+</p>
+</div>
+
+<div class="card">
+<h3>Big Rip</h3>
+<p>
+In some hypothetical dark-energy models, accelerated expansion could
+eventually become strong enough to disrupt gravitationally bound systems.
+</p>
+</div>
+
+<div class="card">
+<h3>Other Possibilities</h3>
+<p>
+Alternative cosmological models can produce different long-term futures,
+although many are not supported by current observations.
+</p>
+</div>
+
+</div>
+
+<p>
+The observed behaviour of dark energy is therefore one of the major
+clues needed to understand the universe's ultimate destiny.
+</p>
+
+</section>
+
+
+<section id="questions">
+
+<h2>16. Open Questions</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>What Is Dark Matter?</h3>
+<p>
+What particle or physical phenomenon produces the gravitational effects
+attributed to dark matter?
+</p>
+</div>
+
+<div class="card">
+<h3>What Is Dark Energy?</h3>
+<p>
+Is dark energy a cosmological constant, a changing field or evidence
+that gravity behaves differently on cosmic scales?
+</p>
+</div>
+
+<div class="card">
+<h3>What Happened Before Inflation?</h3>
+<p>
+If inflation occurred, what physical process created the conditions
+for it?
+</p>
+</div>
+
+<div class="card">
+<h3>Why Is There More Matter Than Antimatter?</h3>
+<p>
+The observable universe contains far more matter than antimatter.
+The origin of this asymmetry remains a major problem in physics.
+</p>
+</div>
+
+<div class="card">
+<h3>What Is the Nature of Spacetime?</h3>
+<p>
+Can general relativity eventually be unified with quantum mechanics
+into a complete theory of quantum gravity?
+</p>
+</div>
+
+<div class="card">
+<h3>Why These Physical Constants?</h3>
+<p>
+Cosmologists investigate why the fundamental constants and initial
+conditions of our universe have their observed values.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="summary">
+
+<h2>17. Summary</h2>
+
+<p>
+Cosmology attempts to understand the universe from its earliest moments
+to its distant future.
+</p>
+
+<p>
+The Big Bang model, cosmic expansion, the cosmic microwave background,
+dark matter, dark energy and the formation of large-scale structure
+form the foundation of modern observational cosmology.
+</p>
+
+<p>
+Yet some of the biggest questions remain unanswered.
+We still do not know the fundamental nature of dark matter or dark
+energy, what happened at the earliest moments of cosmic history, or
+whether our current description of gravity is complete.
+</p>
+
+<div class="highlight">
+
+<strong>The cosmic perspective:</strong>
+
+Everything we observe — stars, galaxies, planets and life itself —
+exists within a universe that has been evolving for billions of years.
+
+</div>
+
+</section>
+
+
+<section>
+
+<h2>Scientific References</h2>
+
+<p>
+For further study, useful scientific resources include NASA,
+ESA, the European Southern Observatory, major astronomical surveys,
+cosmic microwave background experiments and peer-reviewed cosmology
+research.
+</p>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+COSMIC ARCHIVE · COSMOLOGY<br>
+Exploring the origin, evolution and future of the universe.
+
+</footer>
+
+</body>
+</html>
