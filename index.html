@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B2CBKK78QQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-B2CBKK78QQ');
-</script>
+<head>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B2CBKK78QQ"></script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-B2CBKK78QQ');
+    </script>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Cosmic Archive — Astronomy & Physics</title>
 
@@ -21,180 +31,415 @@
     <meta name="author"
           content="Narziqulov Shamshod Ozod o‘g‘li">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        html {
-            scroll-behavior: smooth;
-        }
+<style>
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            color: white;
-            min-height: 100vh;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-            background:
-                radial-gradient(
-                    circle at 20% 20%,
-                    #172554 0,
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 80% 80%,
-                    #312e81 0,
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    #020617,
-                    #0f172a 50%,
-                    #020617
-                );
-        }
 
-        header {
-            text-align: center;
-            padding: 70px 20px 50px;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        header h1 {
-            font-size: clamp(42px, 8vw, 78px);
-            letter-spacing: 4px;
-            margin-bottom: 18px;
-        }
 
-        header p {
-            max-width: 750px;
-            margin: auto;
-            color: #cbd5e1;
-            font-size: 18px;
-            line-height: 1.7;
-        }
+body{
 
-        .creator {
-            margin-top: 20px;
-            color: #94a3b8;
-            font-size: 14px;
-        }
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-        .container {
-            width: min(1150px, 92%);
-            margin: auto;
-            padding-bottom: 80px;
-        }
+    color:white;
 
-        .section-title {
-            text-align: center;
-            margin: 35px 0 30px;
-        }
+    min-height:100vh;
 
-        .section-title h2 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
+    background:
 
-        .section-title p {
-            color: #94a3b8;
-        }
+        radial-gradient(
+            circle at 20% 20%,
+            #172554 0,
+            transparent 35%
+        ),
 
-        .grid {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
+        radial-gradient(
+            circle at 80% 80%,
+            #312e81 0,
+            transparent 35%
+        ),
 
-        .card {
-            display: block;
-            text-decoration: none;
-            color: white;
+        linear-gradient(
+            135deg,
+            #020617,
+            #0f172a 50%,
+            #020617
+        );
+}
 
-            padding: 28px;
-            min-height: 200px;
 
-            border-radius: 20px;
-            border: 1px solid rgba(148, 163, 184, 0.18);
+/* HEADER */
 
-            background: rgba(15, 23, 42, 0.78);
+header{
 
-            backdrop-filter: blur(10px);
+    text-align:center;
 
-            transition:
-                transform 0.25s ease,
-                background 0.25s ease,
-                border-color 0.25s ease;
-        }
+    padding:
+        70px 20px
+        50px;
+}
 
-        .card:hover {
-            transform: translateY(-7px);
 
-            background: rgba(30, 41, 59, 0.95);
+header h1{
 
-            border-color:
-                rgba(255, 255, 255, 0.4);
-        }
+    font-size:
+        clamp(
+            42px,
+            8vw,
+            78px
+        );
 
-        .icon {
-            font-size: 42px;
-            margin-bottom: 18px;
-        }
+    letter-spacing:4px;
 
-        .card h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
+    margin-bottom:18px;
+}
 
-        .card p {
-            color: #aebbd0;
-            line-height: 1.6;
-            font-size: 15px;
-        }
 
-        .tools {
-            margin-top: 55px;
-        }
+header p{
 
-        footer {
-            text-align: center;
-            padding: 35px 20px;
+    max-width:750px;
 
-            border-top:
-                1px solid rgba(148, 163, 184, 0.15);
+    margin:auto;
 
-            color: #94a3b8;
-            line-height: 1.8;
-        }
+    color:#cbd5e1;
 
-        footer strong {
-            color: white;
-        }
+    font-size:18px;
 
-        @media (max-width: 600px) {
+    line-height:1.7;
+}
 
-            header {
-                padding-top: 45px;
-            }
 
-            header h1 {
-                letter-spacing: 2px;
-            }
+.creator{
 
-            .card {
-                min-height: auto;
-            }
-        }
-    </style>
+    margin-top:20px;
+
+    color:#94a3b8;
+
+    font-size:14px;
+}
+
+
+/* CONTAINER */
+
+.container{
+
+    width:
+        min(
+            1150px,
+            92%
+        );
+
+    margin:auto;
+
+    padding-bottom:80px;
+}
+
+
+/* SECTION */
+
+.section-title{
+
+    text-align:center;
+
+    margin:
+        35px 0
+        30px;
+}
+
+
+.section-title h2{
+
+    font-size:32px;
+
+    margin-bottom:10px;
+}
+
+
+.section-title p{
+
+    color:#94a3b8;
+}
+
+
+/* GRID */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                250px,
+                1fr
+            )
+        );
+
+    gap:20px;
+}
+
+
+/* CARD */
+
+.card{
+
+    display:block;
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:28px;
+
+    min-height:200px;
+
+    border-radius:20px;
+
+    border:
+        1px solid
+        rgba(
+            148,
+            163,
+            184,
+            0.18
+        );
+
+    background:
+        rgba(
+            15,
+            23,
+            42,
+            0.78
+        );
+
+    backdrop-filter:
+        blur(10px);
+
+    transition:
+        transform
+        0.25s ease,
+
+        background
+        0.25s ease,
+
+        border-color
+        0.25s ease;
+}
+
+
+.card:hover{
+
+    transform:
+        translateY(-7px);
+
+    background:
+        rgba(
+            30,
+            41,
+            59,
+            0.95
+        );
+
+    border-color:
+        rgba(
+            255,
+            255,
+            255,
+            0.4
+        );
+}
+
+
+.icon{
+
+    font-size:42px;
+
+    margin-bottom:18px;
+}
+
+
+.card h3{
+
+    font-size:22px;
+
+    margin-bottom:10px;
+}
+
+
+.card p{
+
+    color:#aebbd0;
+
+    line-height:1.6;
+
+    font-size:15px;
+}
+
+
+/* COSMIC LAB SPECIAL */
+
+.cosmic-lab{
+
+    border:
+        1px solid
+        rgba(
+            80,
+            210,
+            255,
+            0.35
+        );
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(30,80,150,.35),
+            rgba(20,30,70,.75)
+        );
+}
+
+
+.cosmic-lab:hover{
+
+    border-color:
+        #55d9ff;
+
+    box-shadow:
+        0 0 35px
+        rgba(
+            60,
+            200,
+            255,
+            .18
+        );
+}
+
+
+.lab-button{
+
+    display:inline-block;
+
+    margin-top:18px;
+
+    padding:
+        9px 16px;
+
+    border-radius:
+        999px;
+
+    border:
+        1px solid
+        rgba(
+            100,
+            220,
+            255,
+            .4
+        );
+
+    color:#8eeaff;
+
+    background:
+        rgba(
+            50,
+            190,
+            255,
+            .08
+        );
+
+    font-size:13px;
+
+    font-weight:bold;
+}
+
+
+/* TOOLS */
+
+.tools{
+
+    margin-top:55px;
+}
+
+
+/* FOOTER */
+
+footer{
+
+    text-align:center;
+
+    padding:
+        35px 20px;
+
+    border-top:
+        1px solid
+        rgba(
+            148,
+            163,
+            184,
+            .15
+        );
+
+    color:#94a3b8;
+
+    line-height:1.8;
+}
+
+
+footer strong{
+
+    color:white;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    header{
+
+        padding-top:45px;
+    }
+
+
+    header h1{
+
+        letter-spacing:2px;
+    }
+
+
+    .card{
+
+        min-height:auto;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
+
+<!-- HEADER -->
+
 <header>
 
-    <h1>🌌 COSMIC ARCHIVE</h1>
+    <h1>
+        🌌 COSMIC ARCHIVE
+    </h1>
 
     <p>
         Explore the universe through astronomy,
@@ -202,191 +447,308 @@
     </p>
 
     <div class="creator">
-        Created by Narziqulov Shamshod Ozod o‘g‘li
+
+        Created by
+        Narziqulov Shamshod Ozod o‘g‘li
+
     </div>
 
 </header>
 
 
+
 <main class="container">
 
-    <div class="section-title">
 
-        <h2>Explore the Universe</h2>
+<!-- EXPLORE -->
 
-        <p>
-            Choose a topic and begin your journey
-            through space and science.
-        </p>
+<div class="section-title">
 
+    <h2>
+        Explore the Universe
+    </h2>
+
+    <p>
+        Choose a topic and begin your journey
+        through space and science.
+    </p>
+
+</div>
+
+
+
+<div class="grid">
+
+
+<!-- STARS -->
+
+<a
+    href="stars.html"
+    class="card"
+>
+
+    <div class="icon">
+        ⭐
     </div>
 
+    <h3>
+        Stars
+    </h3>
 
-    <div class="grid">
+    <p>
+        Learn how stars are born,
+        evolve, produce energy and die.
+    </p>
 
-
-        <!-- STARS -->
-
-        <a href="stars.html" class="card">
-
-            <div class="icon">⭐</div>
-
-            <h3>Stars</h3>
-
-            <p>
-                Learn how stars are born,
-                evolve, produce energy and die.
-            </p>
-
-        </a>
+</a>
 
 
-        <!-- BLACK HOLES -->
 
-        <a href="Black-holes.html" class="card">
+<!-- BLACK HOLES -->
 
-            <div class="icon">🕳️</div>
+<a
+    href="Black-holes.html"
+    class="card"
+>
 
-            <h3>Black Holes</h3>
-
-            <p>
-                Explore event horizons,
-                spacetime, singularities,
-                accretion disks and gravitational waves.
-            </p>
-
-        </a>
-
-
-        <!-- GALAXIES -->
-
-        <a href="galaxies.html" class="card">
-
-            <div class="icon">🌌</div>
-
-            <h3>Galaxies</h3>
-
-            <p>
-                Discover the Milky Way,
-                galaxy types, dark matter,
-                mergers and the cosmic web.
-            </p>
-
-        </a>
-
-
-        <!-- SUPERNOVAE -->
-
-        <a href="supernovae.html" class="card">
-
-            <div class="icon">💥</div>
-
-            <h3>Supernovae</h3>
-
-            <p>
-                Discover stellar explosions,
-                neutron stars, black holes
-                and element formation.
-            </p>
-
-        </a>
-
-
-        <!-- EXOPLANETS -->
-
-        <a href="exoplanets.html" class="card">
-
-            <div class="icon">🪐</div>
-
-            <h3>Exoplanets</h3>
-
-            <p>
-                Explore planets beyond our
-                Solar System and potentially
-                habitable worlds.
-            </p>
-
-        </a>
-
-
-        <!-- COSMOLOGY -->
-
-        <a href="cosmology.html" class="card">
-
-            <div class="icon">🌠</div>
-
-            <h3>Cosmology</h3>
-
-            <p>
-                Study the Big Bang,
-                cosmic expansion, dark matter,
-                dark energy and the universe.
-            </p>
-
-        </a>
-
+    <div class="icon">
+        🕳️
     </div>
 
+    <h3>
+        Black Holes
+    </h3>
 
-    <!-- SCIENTIFIC TOOLS -->
+    <p>
+        Explore event horizons,
+        spacetime, singularities,
+        accretion disks and
+        gravitational waves.
+    </p>
 
-    <div class="section-title tools">
+</a>
 
-        <h2>Scientific Tools</h2>
 
-        <p>
-            Interactive tools for physics
-            and scientific exploration.
-        </p>
 
+<!-- GALAXIES -->
+
+<a
+    href="galaxies.html"
+    class="card"
+>
+
+    <div class="icon">
+        🌌
     </div>
 
+    <h3>
+        Galaxies
+    </h3>
 
-    <div class="grid">
+    <p>
+        Discover the Milky Way,
+        galaxy types, dark matter,
+        mergers and the cosmic web.
+    </p>
 
-
-        <!-- PHYSICS CALCULATOR -->
-
-        <a href="physics-calculator.html" class="card">
-
-            <div class="icon">⚡</div>
-
-            <h3>Physics Lab</h3>
-
-            <p>
-                Calculate mechanics,
-                thermodynamics,
-                electromagnetism,
-                optics and modern physics.
-            </p>
-
-        </a>
+</a>
 
 
-        <!-- ABOUT CREATOR -->
 
-        <a href="about-creator.html" class="card">
+<!-- SUPERNOVAE -->
 
-            <div class="icon">👨‍💻</div>
+<a
+    href="supernovae.html"
+    class="card"
+>
 
-            <h3>About Creator</h3>
-
-            <p>
-                Learn about the creator of
-                Cosmic Archive, the project
-                and its technologies.
-            </p>
-
-        </a>
-
+    <div class="icon">
+        💥
     </div>
+
+    <h3>
+        Supernovae
+    </h3>
+
+    <p>
+        Discover stellar explosions,
+        neutron stars, black holes
+        and element formation.
+    </p>
+
+</a>
+
+
+
+<!-- EXOPLANETS -->
+
+<a
+    href="exoplanets.html"
+    class="card"
+>
+
+    <div class="icon">
+        🪐
+    </div>
+
+    <h3>
+        Exoplanets
+    </h3>
+
+    <p>
+        Explore planets beyond our
+        Solar System and potentially
+        habitable worlds.
+    </p>
+
+</a>
+
+
+
+<!-- COSMOLOGY -->
+
+<a
+    href="cosmology.html"
+    class="card"
+>
+
+    <div class="icon">
+        🌠
+    </div>
+
+    <h3>
+        Cosmology
+    </h3>
+
+    <p>
+        Study the Big Bang,
+        cosmic expansion,
+        dark matter,
+        dark energy and the universe.
+    </p>
+
+</a>
+
+
+</div>
+
+
+
+<!-- SCIENTIFIC TOOLS -->
+
+<div class="section-title tools">
+
+    <h2>
+        Scientific Tools
+    </h2>
+
+    <p>
+        Interactive tools for physics
+        and scientific exploration.
+    </p>
+
+</div>
+
+
+
+<div class="grid">
+
+
+<!-- COSMIC LAB -->
+
+<a
+    href="cosmic-lab.html"
+    class="card cosmic-lab"
+>
+
+    <div class="icon">
+        🌌
+    </div>
+
+    <h3>
+        Cosmic Lab
+    </h3>
+
+    <p>
+        Build and explore your own
+        mini universe. Place black holes,
+        stars, pulsars, planets and
+        asteroids and observe their
+        gravitational interactions.
+    </p>
+
+    <span class="lab-button">
+        🚀 Enter Cosmic Lab →
+    </span>
+
+</a>
+
+
+
+<!-- PHYSICS CALCULATOR -->
+
+<a
+    href="physics-calculator.html"
+    class="card"
+>
+
+    <div class="icon">
+        ⚡
+    </div>
+
+    <h3>
+        Physics Lab
+    </h3>
+
+    <p>
+        Calculate mechanics,
+        thermodynamics,
+        electromagnetism,
+        optics and modern physics.
+    </p>
+
+</a>
+
+
+
+<!-- ABOUT CREATOR -->
+
+<a
+    href="about-creator.html"
+    class="card"
+>
+
+    <div class="icon">
+        👨‍💻
+    </div>
+
+    <h3>
+        About Creator
+    </h3>
+
+    <p>
+        Learn about the creator of
+        Cosmic Archive, the project
+        and its technologies.
+    </p>
+
+</a>
+
+
+</div>
+
 
 </main>
 
 
+
+<!-- FOOTER -->
+
 <footer>
 
-    <strong>Cosmic Archive</strong>
+    <strong>
+        Cosmic Archive
+    </strong>
 
     <br>
 
@@ -395,9 +757,12 @@
 
     <br><br>
 
-    © 2026 Narziqulov Shamshod Ozod o‘g‘li
+    © 2026
+    Narziqulov Shamshod Ozod o‘g‘li
 
 </footer>
 
+
 </body>
+
 </html>
