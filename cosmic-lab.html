@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B2CBKK78QQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B2CBKK78QQ');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cosmic Lab — Mini Universe</title>
+
+<style>
+*{box-sizing:border-box}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#010208;
+    color:white;
+    font-family:Arial,sans-serif;
+}
+
+#space{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 50%,
+        #0b1030 0%,
+        #03051a 50%,
+        #010107 100%);
+}
+
+.bg-star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    opacity:.65;
+    pointer-events:none;
+}
+
+#menu{
+    position:absolute;
+    z-index:100;
+    top:15px;
+    left:15px;
+    width:305px;
+    padding:17px;
+    border-radius:18px;
+    background:rgba(7,10,30,.94);
+    border:1px solid rgba(110,160,255,.35);
+    box-shadow:0 15px 50px rgba(0,0,0,.5);
+    backdrop-filter:blur(12px);
+}
+
+h1{
+    margin:0;
+    font-size:24px;
+}
+
+.subtitle{
+    color:#9ca8cc;
+    font-size:12px;
+    margin:5px 0 15px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+}
+
+button{
+    border:1px solid #3c4d78;
+    background:#11172d;
+    color:white;
+    border-radius:9px;
+    padding:10px 5px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#26375f;
+}
+
+button.active{
+    background:#146bb3;
+    border-color:#65caff;
+}
+
+.full{
+    width:100%;
+    margin-top:7px;
+}
+
+#status{
+    margin-top:10px;
+    padding:9px;
+    border-radius:9px;
+    background:rgba(255,255,255,.05);
+    color:#a9dcff;
+    font-size:12px;
+}
+
+#info{
+    margin-top:7px;
+    padding:10px;
+    border-radius:9px;
+    background:rgba(255,255,255,.04);
+    font-size:12px;
+    line-height:1.5;
+}
+
+#count{
+    margin-top:7px;
+    color:#7887ab;
+    font-size:11px;
+}
+
+.object{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+}
+
+.blackhole{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:#000;
+    border:3px solid #ffb34b;
+    box-shadow:
+        0 0 12px #ff9a2e,
+        0 0 35px #7b3fff,
+        0 0 70px rgba(255,100,30,.2);
+}
+
+.disk{
+    position:absolute;
+    width:180px;
+    height:55px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    border-top:5px solid #ffb33c;
+    border-bottom:5px solid #c247ff;
+    box-shadow:
+        0 0 18px #ff702c,
+        0 0 35px #713aff;
+    pointer-events:none;
+}
+
+.starObject{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:radial-gradient(
+        circle at 35% 35%,
+        #fff7b0,
+        #ffd052 45%,
+        #ff9a20 100%
+    );
+    box-shadow:
+        0 0 12px #fff0a0,
+        0 0 30px #ff9e28,
+        0 0 60px rgba(255,150,30,.35);
+}
+
+.planetObject{
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:radial-gradient(
+        circle at 35% 30%,
+        #9ed2ff,
+        #3d8ee8
+    );
+    box-shadow:0 0 12px #318fff;
+}
+
+.asteroidObject{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#999;
+    box-shadow:0 0 6px #aaa;
+}
+
+.pulsarObject{
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    background:#e4f9ff;
+    box-shadow:
+        0 0 12px #9ce8ff,
+        0 0 35px #287cff;
+}
+
+.beam{
+    position:absolute;
+    width:5px;
+    height:340px;
+    transform-origin:bottom center;
+    background:linear-gradient(
+        to top,
+        rgba(100,220,255,.85),
+        rgba(50,100,255,0)
+    );
+    pointer-events:none;
+}
+
+.label{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    white-space:nowrap;
+    color:#dbe8ff;
+    font-size:10px;
+    font-weight:bold;
+    text-shadow:0 0 5px black,0 0 5px black;
+    pointer-events:none;
+}
+
+.orbit{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    border:1px dashed rgba(120,180,255,.16);
+    border-radius:50%;
+    pointer-events:none;
+}
+
+.flash{
+    position:absolute;
+    width:70px;
+    height:70px;
+    transform:translate(-50%,-50%) scale(.2);
+    border-radius:50%;
+    border:3px solid white;
+    box-shadow:0 0 20px white,0 0 60px #52c8ff;
+    animation:explosion .55s forwards;
+    pointer-events:none;
+}
+
+@keyframes explosion{
+    0%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(.2);
+    }
+    100%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(2.8);
+    }
+}
+
+@media(max-width:600px){
+    #menu{
+        width:235px;
+        left:8px;
+        top:8px;
+        padding:12px;
+    }
+
+    h1{font-size:19px}
+
+    button{
+        padding:7px 3px;
+        font-size:11px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="space"></div>
+
+<div id="menu">
+
+<h1>🌌 Cosmic Lab</h1>
+
+<div class="subtitle">
+Build your own mini universe
+</div>
+
+<div class="grid">
+
+<button data-type="blackhole">🕳️ Black Hole</button>
+<button data-type="star">⭐ Star</button>
+
+<button data-type="pulsar">🌀 Pulsar</button>
+<button data-type="planet">🪐 Planet</button>
+
+<button data-type="asteroid">☄️ Asteroid</button>
+<button id="select">🖱️ Select</button>
+
+</div>
+
+<div class="grid" style="margin-top:7px">
+
+<button id="start">▶ Start</button>
+<button id="pause">⏸ Pause</button>
+
+</div>
+
+<div class="grid">
+
+<button id="reset">↻ Reset</button>
+<button id="speed">⚡ ×1</button>
+
+</div>
+
+<button id="clear" class="full">
+🗑 Clear Universe
+</button>
+
+<div id="status">
+Mode: Select
+</div>
+
+<div id="info">
+Obyekt tanlang va kosmosga joylashtiring.
+</div>
+
+<div id="count">
+Objects: 0
+</div>
+
+</div>
+
+<script>
+
+/* =====================================================
+   COSMIC LAB
+===================================================== */
+
+const space=document.getElementById("space");
+const status=document.getElementById("status");
+const info=document.getElementById("info");
+const count=document.getElementById("count");
+
+let objects=[];
+let selected=null;
+let mode="select";
+let running=false;
+let speed=1;
+
+
+/* =====================================================
+   PHYSICS CONSTANTS
+===================================================== */
+
+/*
+   Vizual masshtabdagi gravitatsiya.
+*/
+const G=0.045;
+
+
+/*
+   Qora tuynuk event horizon.
+*/
+const EVENT_HORIZON=62;
+
+
+/*
+   Jism juda uzoqqa chiqib ketmasligi uchun
+   yumshoq chegaraviy himoya.
+*/
+const MAX_SPEED=7;
+
+
+/* =====================================================
+   TYPES
+===================================================== */
+
+const TYPES={
+
+    blackhole:{
+        name:"Black Hole",
+        mass:6000,
+        radius:58
+    },
+
+    star:{
+        name:"Star",
+        mass:300,
+        radius:36
+    },
+
+    pulsar:{
+        name:"Pulsar",
+        mass:800,
+        radius:25
+    },
+
+    planet:{
+        name:"Planet",
+        mass:15,
+        radius:18
+    },
+
+    asteroid:{
+        name:"Asteroid",
+        mass:2,
+        radius:9
+    }
+
+};
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+function createBackground(){
+
+    for(let i=0;i<320;i++){
+
+        const star=
+            document.createElement("div");
+
+        star.className="bg-star";
+
+        star.style.left=
+            Math.random()*100+"%";
+
+        star.style.top=
+            Math.random()*100+"%";
+
+        star.style.opacity=
+            .2+
+            Math.random()*.7;
+
+        space.appendChild(star);
+
+    }
+
+}
+
+
+/* =====================================================
+   FIND CENTRAL MASS
+===================================================== */
+
+function findParent(x,y,type){
+
+    let best=null;
+    let bestDistance=Infinity;
+
+    for(const body of objects){
+
+        if(!body.alive)
+            continue;
+
+        /*
+           Faqat o'zidan kattaroq massa
+           markaziy jism bo'la oladi.
+        */
+
+        if(
+            body.mass<=
+            TYPES[type].mass
+        )
+            continue;
+
+        const distance=
+            Math.hypot(
+                x-body.x,
+                y-body.y
+            );
+
+        if(distance<bestDistance){
+
+            bestDistance=distance;
+            best=body;
+
+        }
+
+    }
+
+    return best;
+}
+
+
+/* =====================================================
+   ORBITAL VELOCITY
+===================================================== */
+
+function orbitalVelocity(
+    parent,
+    x,
+    y
+){
+
+    const dx=x-parent.x;
+    const dy=y-parent.y;
+
+    const radius=
+        Math.max(
+            Math.hypot(dx,dy),
+            100
+        );
+
+
+    /*
+       v = sqrt(GM/r)
+    */
+
+    let v=
+        Math.sqrt(
+            G*
+            parent.mass/
+            radius
+        );
+
+
+    /*
+       Vizual masshtab.
+       Oldingi 2.4 juda katta edi.
+    */
+
+    v*=0.82;
+
+
+    /*
+       Radius vektorga 90°.
+       Bu orbital yo'nalish.
+    */
+
+    let tx=
+        -dy/radius;
+
+    let ty=
+        dx/radius;
+
+
+    /*
+       Biroz orbital tezlik.
+    */
+
+    return {
+
+        vx:tx*v,
+        vy:ty*v
+
+    };
+
+}
+
+
+/* =====================================================
+   CREATE OBJECT
+===================================================== */
+
+function createObject(type,x,y){
+
+    const data=TYPES[type];
+
+    const parent=
+        findParent(
+            x,
+            y,
+            type
+        );
+
+
+    const element=
+        document.createElement("div");
+
+    element.className=
+        "object "+
+        getClass(type);
+
+    element.style.left=x+"px";
+    element.style.top=y+"px";
+
+    space.appendChild(element);
+
+
+    const body={
+
+        type:type,
+
+        name:data.name,
+
+        x:x,
+        y:y,
+
+        vx:0,
+        vy:0,
+
+        mass:data.mass,
+
+        radius:data.radius,
+
+        angle:
+            Math.random()*
+            Math.PI*2,
+
+        spin:
+            type==="pulsar"
+            ? .09
+            : .008,
+
+        alive:true,
+
+        parent:parent,
+
+        element:element,
+
+        disk:null,
+
+        beam:null,
+
+        label:null,
+
+        orbit:null
+
+    };
+
+
+    /*
+       Agar parent bor bo'lsa,
+       avtomatik orbital tezlik.
+    */
+
+    if(parent){
+
+        const velocity=
+            orbitalVelocity(
+                parent,
+                x,
+                y
+            );
+
+        body.vx=
+            velocity.vx;
+
+        body.vy=
+            velocity.vy;
+
+
+        createOrbit(
+            body,
+            parent
+        );
+
+    }
+
+
+    objects.push(body);
+
+    selected=body;
+
+
+    if(type==="blackhole")
+        createDisk(body);
+
+
+    if(type==="pulsar")
+        createBeam(body);
+
+
+    createLabel(body);
+
+    updateEverything();
+
+
+    status.textContent=
+        parent
+        ? "🛰️ "+data.name+
+          " orbitga joylashtirildi"
+        : "✅ "+data.name+
+          " joylashtirildi";
+
+}
+
+
+/* =====================================================
+   CSS CLASS
+===================================================== */
+
+function getClass(type){
+
+    if(type==="blackhole")
+        return "blackhole";
+
+    if(type==="star")
+        return "starObject";
+
+    if(type==="pulsar")
+        return "pulsarObject";
+
+    if(type==="planet")
+        return "planetObject";
+
+    return "asteroidObject";
+
+}
+
+
+/* =====================================================
+   ORBIT
+===================================================== */
+
+function createOrbit(body,parent){
+
+    const distance=
+        Math.hypot(
+            body.x-parent.x,
+            body.y-parent.y
+        );
+
+
+    /*
+       Juda kichik orbit chizmaymiz.
+    */
+
+    if(distance<100)
+        return;
+
+
+    const orbit=
+        document.createElement("div");
+
+    orbit.className="orbit";
+
+    orbit.style.width=
+        distance*2+"px";
+
+    orbit.style.height=
+        distance*2+"px";
+
+    orbit.style.left=
+        parent.x+"px";
+
+    orbit.style.top=
+        parent.y+"px";
+
+    space.appendChild(orbit);
+
+    body.orbit=orbit;
+
+}
+
+
+/* =====================================================
+   BLACK HOLE DISK
+===================================================== */
+
+function createDisk(body){
+
+    const disk=
+        document.createElement("div");
+
+    disk.className="disk";
+
+    disk.style.left=
+        body.x+"px";
+
+    disk.style.top=
+        body.y+"px";
+
+    space.appendChild(disk);
+
+    body.disk=disk;
+
+}
+
+
+/* =====================================================
+   PULSAR BEAM
+===================================================== */
+
+function createBeam(body){
+
+    const beam=
+        document.createElement("div");
+
+    beam.className="beam";
+
+    space.appendChild(beam);
+
+    body.beam=beam;
+
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+function createLabel(body){
+
+    const label=
+        document.createElement("div");
+
+    label.className="label";
+
+    label.textContent=
+        body.name;
+
+    space.appendChild(label);
+
+    body.label=label;
+
+}
+
+
+/* =====================================================
+   MODE
+===================================================== */
+
+document
+.querySelectorAll("[data-type]")
+.forEach(button=>{
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+            mode=
+                button.dataset.type;
+
+            document
+            .querySelectorAll("button")
+            .forEach(
+                b=>
+                b.classList.remove("active")
+            );
+
+            button.classList.add("active");
+
+            status.textContent=
+                "Mode: "+
+                TYPES[mode].name;
+
+        }
+    );
+
+});
+
+
+document
+.getElementById("select")
+.addEventListener(
+    "click",
+    ()=>{
+
+        mode="select";
+
+        document
+        .querySelectorAll("button")
+        .forEach(
+            b=>
+            b.classList.remove("active")
+        );
+
+        document
+        .getElementById("select")
+        .classList.add("active");
+
+        status.textContent=
+            "Mode: Select";
+
+    }
+);
+
+
+/* =====================================================
+   PLACE / SELECT
+===================================================== */
+
+space.addEventListener(
+    "pointerdown",
+    function(e){
+
+        /*
+           Faqat bo'sh kosmosga bosilganda.
+        */
+
+        if(
+            e.target!==space &&
+            !e.target.classList.contains(
+                "bg-star"
+            )
+        )
+            return;
+
+
+        const x=e.clientX;
+        const y=e.clientY;
+
+
+        /*
+           PLACE
+        */
+
+        if(mode!=="select"){
+
+            createObject(
+                mode,
+                x,
+                y
+            );
+
+            return;
+
+        }
+
+
+        /*
+           SELECT
+        */
+
+        selected=null;
+
+
+        for(
+            let i=objects.length-1;
+            i>=0;
+            i--
+        ){
+
+            const body=
+                objects[i];
+
+            const distance=
+                Math.hypot(
+                    x-body.x,
+                    y-body.y
+                );
+
+            if(
+                distance<
+                body.radius
+            ){
+
+                selected=body;
+
+                break;
+
+            }
+
+        }
+
+        updateInfo();
+
+    }
+);
+
+
+/* =====================================================
+   PHYSICS
+===================================================== */
+
+function physics(){
+
+    if(!running)
+        return;
+
+
+    /*
+       Gravitatsiya.
+    */
+
+    for(
+        let i=0;
+        i<objects.length;
+        i++
+    ){
+
+        const a=objects[i];
+
+        if(!a.alive)
+            continue;
+
+
+        /*
+           Qora tuynuk markaziy jism sifatida
+           joyida qoladi.
+        */
+
+        if(
+            a.type==="blackhole"
+        )
+            continue;
+
+
+        let totalAx=0;
+        let totalAy=0;
+
+
+        for(
+            let j=0;
+            j<objects.length;
+            j++
+        ){
+
+            if(i===j)
+                continue;
+
+
+            const b=objects[j];
+
+            if(!b.alive)
+                continue;
+
+
+            const dx=
+                b.x-a.x;
+
+            const dy=
+                b.y-a.y;
+
+
+            const distance=
+                Math.max(
+                    Math.hypot(dx,dy),
+                    45
+                );
+
+
+            const nx=
+                dx/distance;
+
+            const ny=
+                dy/distance;
+
+
+            /*
+               Asosiy gravitatsiya.
+            */
+
+            let acceleration=
+                G*
+                b.mass/
+                (
+                    distance*
+                    distance
+                );
+
+
+            /*
+               Qora tuynuk yaqinida
+               kuchaytirish.
+            */
+
+            if(
+                b.type==="blackhole"
+            ){
+
+                acceleration*=1.8;
+
+            }
+
+
+            totalAx+=
+                nx*
+                acceleration;
+
+            totalAy+=
+                ny*
+                acceleration;
+
+        }
+
+
+        /*
+           Tezlikni yangilash.
+        */
+
+        a.vx+=
+            totalAx*
+            speed;
+
+        a.vy+=
+            totalAy*
+            speed;
+
+
+        /*
+           Maksimal tezlik.
+           Bu obyektlarning ekrandan
+           otilib ketishining oldini oladi.
+        */
+
+        const currentSpeed=
+            Math.hypot(
+                a.vx,
+                a.vy
+            );
+
+
+        if(
+            currentSpeed>
+            MAX_SPEED
+        ){
+
+            a.vx=
+                a.vx/
+                currentSpeed*
+                MAX_SPEED;
+
+            a.vy=
+                a.vy/
+                currentSpeed*
+                MAX_SPEED;
+
+        }
+
+    }
+
+
+    /*
+       MOVE
+    */
+
+    objects.forEach(body=>{
+
+        if(!body.alive)
+            return;
+
+
+        if(
+            body.type!=="blackhole"
+        ){
+
+            body.x+=
+                body.vx*
+                speed;
+
+            body.y+=
+                body.vy*
+                speed;
+
+        }
+
+
+        /*
+           Pulsar rotation.
+        */
+
+        body.angle+=
+            body.spin*
+            speed;
+
+
+        /*
+           Black hole capture.
+        */
+
+        if(
+            body.type!=="blackhole"
+        ){
+
+            const bh=
+                objects.find(
+                    o=>
+                    o.alive &&
+                    o.type==="blackhole"
+                );
+
+
+            if(bh){
+
+                const distance=
+                    Math.hypot(
+                        body.x-bh.x,
+                        body.y-bh.y
+                    );
+
+
+                if(
+                    distance<
+                    EVENT_HORIZON
+                ){
+
+                    absorb(
+                        bh,
+                        body
+                    );
+
+                    return;
+
+                }
+
+            }
+
+        }
+
+
+        /*
+           Chegaralarda qaytarish.
+        */
+
+        keepInside(body);
+
+
+        updateVisual(body);
+
+    });
+
+
+    collisions();
+
+}
+
+
+/* =====================================================
+   BOUNDARIES
+===================================================== */
+
+function keepInside(body){
+
+    const margin=25;
+
+
+    if(body.x<margin){
+
+        body.x=margin;
+
+        body.vx=
+            Math.abs(body.vx)*.5;
+
+    }
+
+
+    if(
+        body.x>
+        window.innerWidth-margin
+    ){
+
+        body.x=
+            window.innerWidth-margin;
+
+        body.vx=
+            -Math.abs(body.vx)*.5;
+
+    }
+
+
+    if(body.y<margin){
+
+        body.y=margin;
+
+        body.vy=
+            Math.abs(body.vy)*.5;
+
+    }
+
+
+    if(
+        body.y>
+        window.innerHeight-margin
+    ){
+
+        body.y=
+            window.innerHeight-margin;
+
+        body.vy=
+            -Math.abs(body.vy)*.5;
+
+    }
+
+}
+
+
+/* =====================================================
+   COLLISIONS
+===================================================== */
+
+function collisions(){
+
+    for(
+        let i=0;
+        i<objects.length;
+        i++
+    ){
+
+        const a=objects[i];
+
+        if(!a.alive)
+            continue;
+
+
+        for(
+            let j=i+1;
+            j<objects.length;
+            j++
+        ){
+
+            const b=objects[j];
+
+            if(!b.alive)
+                continue;
+
+
+            if(
+                a.type==="blackhole" ||
+                b.type==="blackhole"
+            )
+                continue;
+
+
+            const distance=
+                Math.hypot(
+                    a.x-b.x,
+                    a.y-b.y
+                );
+
+
+            if(
+                distance<
+                (
+                    a.radius+
+                    b.radius
+                )*.7
+            ){
+
+                collision(
+                    a,
+                    b
+                );
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   COLLISION RESPONSE
+===================================================== */
+
+function collision(a,b){
+
+    if(
+        !a.alive ||
+        !b.alive
+    )
+        return;
+
+
+    /*
+       Pulsar yaqin to'qnashuvda
+       tezroq aylanadi.
+    */
+
+    if(
+        a.type==="pulsar"
+    ){
+
+        a.spin=
+            Math.min(
+                .5,
+                a.spin+.035
+            );
+
+    }
+
+
+    if(
+        b.type==="pulsar"
+    ){
+
+        b.spin=
+            Math.min(
+                .5,
+                b.spin+.035
+            );
+
+    }
+
+
+    /*
+       Oddiy elastik qaytish.
+    */
+
+    const avx=a.vx;
+    const avy=a.vy;
+
+    a.vx=b.vx*.75;
+    a.vy=b.vy*.75;
+
+    b.vx=avx*.75;
+    b.vy=avy*.75;
+
+
+    flash(
+        (a.x+b.x)/2,
+        (a.y+b.y)/2
+    );
+
+
+    status.textContent=
+        "💥 Collision detected";
+
+}
+
+
+/* =====================================================
+   BLACK HOLE ABSORB
+===================================================== */
+
+function absorb(
+    blackHole,
+    victim
+){
+
+    if(!victim.alive)
+        return;
+
+
+    blackHole.mass+=
+        victim.mass;
+
+
+    victim.alive=false;
+
+
+    flash(
+        victim.x,
+        victim.y
+    );
+
+
+    removeVisuals(victim);
+
+
+    status.textContent=
+        "🕳️ "+
+        victim.name+
+        " was absorbed";
+
+}
+
+
+/* =====================================================
+   REMOVE VISUALS
+===================================================== */
+
+function removeVisuals(body){
+
+    if(body.element)
+        body.element.remove();
+
+    if(body.label)
+        body.label.remove();
+
+    if(body.disk)
+        body.disk.remove();
+
+    if(body.beam)
+        body.beam.remove();
+
+    if(body.orbit)
+        body.orbit.remove();
+
+}
+
+
+/* =====================================================
+   VISUAL UPDATE
+===================================================== */
+
+function updateVisual(body){
+
+    if(!body.element)
+        return;
+
+
+    body.element.style.left=
+        body.x+"px";
+
+    body.element.style.top=
+        body.y+"px";
+
+
+    if(body.label){
+
+        body.label.style.left=
+            body.x+"px";
+
+        body.label.style.top=
+            (
+                body.y-
+                body.radius-
+                15
+            )+"px";
+
+    }
+
+
+    if(body.disk){
+
+        body.disk.style.left=
+            body.x+"px";
+
+        body.disk.style.top=
+            body.y+"px";
+
+        body.disk.style.transform=
+            "translate(-50%,-50%) rotate("+
+            body.angle+
+            "rad)";
+
+    }
+
+
+    if(body.beam){
+
+        body.beam.style.left=
+            (body.x-2.5)+"px";
+
+        body.beam.style.top=
+            (body.y-340)+"px";
+
+        body.beam.style.transform=
+            "rotate("+
+            body.angle+
+            "rad)";
+
+    }
+
+}
+
+
+/* =====================================================
+   FLASH
+===================================================== */
+
+function flash(x,y){
+
+    const f=
+        document.createElement("div");
+
+    f.className="flash";
+
+    f.style.left=x+"px";
+    f.style.top=y+"px";
+
+    space.appendChild(f);
+
+    setTimeout(
+        ()=>{
+            f.remove();
+        },
+        600
+    );
+
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+function updateInfo(){
+
+    if(!selected){
+
+        info.textContent=
+            "Jism tanlang.";
+
+        return;
+
+    }
+
+
+    const velocity=
+        Math.hypot(
+            selected.vx,
+            selected.vy
+        );
+
+
+    info.innerHTML=
+        "<b>🌌 "+
+        selected.name+
+        "</b><br>"+
+        "Mass: "+
+        selected.mass.toFixed(1)+
+        "<br>"+
+        "Velocity: "+
+        velocity.toFixed(3)+
+        "<br>"+
+        "Rotation: "+
+        selected.spin.toFixed(3)+
+        (
+            selected.parent
+            ? "<br>Orbit: "+
+              selected.parent.name
+            : ""
+        );
+
+}
+
+
+/* =====================================================
+   UPDATE
+===================================================== */
+
+function updateEverything(){
+
+    updateInfo();
+
+    count.textContent=
+        "Objects: "+
+        objects.filter(
+            o=>o.alive
+        ).length;
+
+}
+
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+document
+.getElementById("start")
+.addEventListener(
+    "click",
+    ()=>{
+        running=true;
+
+        status.textContent=
+            "▶ Universe running";
+    }
+);
+
+
+document
+.getElementById("pause")
+.addEventListener(
+    "click",
+    ()=>{
+        running=false;
+
+        status.textContent=
+            "⏸ Universe paused";
+    }
+);
+
+
+document
+.getElementById("speed")
+.addEventListener(
+    "click",
+    ()=>{
+
+        speed=
+            speed===1
+            ? 2
+            : 1;
+
+        document
+        .getElementById("speed")
+        .textContent=
+            "⚡ ×"+speed;
+
+    }
+);
+
+
+document
+.getElementById("clear")
+.addEventListener(
+    "click",
+    ()=>{
+
+        objects.forEach(
+            removeVisuals
+        );
+
+        objects=[];
+
+        selected=null;
+
+        running=false;
+
+        updateEverything();
+
+        status.textContent=
+            "Universe cleared";
+
+    }
+);
+
+
+document
+.getElementById("reset")
+.addEventListener(
+    "click",
+    ()=>{
+
+        objects.forEach(
+            removeVisuals
+        );
+
+        objects=[];
+
+        selected=null;
+
+        running=false;
+
+        speed=1;
+
+        document
+        .getElementById("speed")
+        .textContent=
+            "⚡ ×1";
+
+        updateEverything();
+
+        status.textContent=
+            "↻ Universe reset";
+
+    }
+);
+
+
+/* =====================================================
+   LOOP
+===================================================== */
+
+function loop(){
+
+    physics();
+
+    updateEverything();
+
+    requestAnimationFrame(loop);
+
+}
+
+
+/* =====================================================
+   INIT
+===================================================== */
+
+createBackground();
+
+loop();
+
+</script>
+
+</body>
+</html>
